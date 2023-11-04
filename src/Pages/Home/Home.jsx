@@ -5,6 +5,20 @@ import axiosInstance from "../../AxiosAPI/axiosInstance";
 import CustomLoading from "../../Components/CustomLoading";
 
 function Home() {
+  const { data, isLoading, error } = useQuery({
+    queryFn: async () => {
+      const res = await axiosInstance.get("/api/features");
+      return res.data;
+    },
+    queryKey: ["Features"],
+  });
+  if (error) {
+    return error.message;
+  }
+  if (isLoading) {
+    return <CustomLoading></CustomLoading>;
+  }
+
   return (
     <div className="min-h-screen">
       <Banar></Banar>
