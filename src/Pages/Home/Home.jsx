@@ -3,6 +3,8 @@ import Banar from "./Banar/Banar";
 import FeatureSection from "./Feature/FeatureSection";
 import axiosInstance from "../../AxiosAPI/axiosInstance";
 import CustomLoading from "../../Components/CustomLoading";
+import FreqQusSection from "./FreqQusSection/FreqQusSection";
+import SectionDividerWithText from "../../Components/SectionDividerWithText";
 
 function Home() {
   const { data, isLoading, error } = useQuery({
@@ -22,11 +24,13 @@ function Home() {
   return (
     <div className="min-h-screen">
       <Banar></Banar>
+
       <div className="grid grid-cols-1 md:grid-cols-3 ">
         {data.map((item) => (
           <FeatureSection feature={item} key={item._id}></FeatureSection>
         ))}
       </div>
+      <FreqQusSection></FreqQusSection>
     </div>
   );
 }
