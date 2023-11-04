@@ -20,8 +20,8 @@ function FeatureSection({ feature }) {
   };
 
   return (
-    <div className="cards-container">
-      <div className="card">
+    <div className="mx-4 md:mx-0 cards-container">
+      <div className="m-2 mx-auto card lg:m-7 md:m-3 ">
         <div style={cardStyle} className="card-image quiz-image"></div>
         <div className="card-text">
           <span className="date">{date}</span>

@@ -14,7 +14,7 @@ function Banar() {
     <div className="relative">
       <div
         style={backgroundImageStyle}
-        className={`relative min-h-screen  bg-center bg-no-repeat bg-cover`}
+        className={`relative min-h-[80vh] md:min-h-screen lg:min-h-screen  bg-center bg-no-repeat bg-cover`}
         // className={`relative min-h-screen bg-[url(image/weeding-bg.jpg')] bg-center bg-no-repeat bg-cover`}
       ></div>
 
@@ -26,8 +26,9 @@ function Banar() {
         </p>
 
         <h1 className="mb-4 uppercase lg:text-8xl md:text-6xl text-5xl  md:leading-[140px] font-bold"></h1>
-        <p className="text-[72px] text-center   leading-[98px]">
-          Assignment Help Service In <br /> The World.
+        <p className=" lg:text-[72px] text-center   lg:leading-[98px]">
+          Assignment Help Service In <br className="hidden lg:block" /> The
+          World.
         </p>
         <div className="hero-btn-wrap">
           <ButtonCustom>Read More About +</ButtonCustom>
