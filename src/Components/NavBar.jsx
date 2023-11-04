@@ -6,39 +6,26 @@ function NavBar() {
   const navLinks = (
     <>
       <li>
-        <NavLink
-          to="/"
-          className={({ isActive, isPending }) =>
-            isPending
-              ? "pending"
-              : isActive
-              ? "text-pink-500 font-semibold"
-              : ""
-          }
-        >
-          Home
-        </NavLink>
+        <NavLink>Home</NavLink>
       </li>
       <li>
-        <NavLink
-          to="/about"
-          className={({ isActive, isPending }) =>
-            isPending
-              ? "pending"
-              : isActive
-              ? "text-pink-500 font-semibold"
-              : ""
-          }
-        >
-          About Us
-        </NavLink>
+        <NavLink>Assignments</NavLink>
+      </li>
+      <li>
+        <NavLink>Create Assignments</NavLink>
+      </li>
+      <li>
+        <NavLink>My Assignments</NavLink>
+      </li>
+      <li>
+        <NavLink>Submitted Assignments</NavLink>
       </li>
       <li></li>
     </>
   );
 
   return (
-    <div className="left-0 right-0 z-50 w-full mx-auto rounded-b-none bg-base-100 navbar ">
+    <div className="absolute left-0 right-0 z-50 w-full mx-auto text-white rounded-b-none max-w-7xl h-28 navbar">
       <div className="w-full lg:w-[50%] navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -64,7 +51,13 @@ function NavBar() {
             {navLinks}
           </ul>
         </div>
-        <a className="text-xl normal-case btn btn-ghost">daisyUI</a>
+        <a className="text-xl normal-case btn btn-ghost">
+          <img
+            src="https://i.ibb.co/rQd3sFn/download.png"
+            className="h-full"
+            alt=""
+          />
+        </a>
       </div>
       <div className="hidden navbar-center lg:flex">
         <ul className="inline-flex flex-row flex-wrap gap-3 p-2 px-1 text-xl font-semibold menuu menuu-horizontal">
@@ -107,7 +100,7 @@ function NavBar() {
             <li>
               <NavLink
                 to="/Login"
-                className="inline-block rounded bg-pink-500 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-pink-600 hover:shadow-lg focus:bg-pink-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-pink-700 active:shadow-lg dark:shadow-md dark:hover:shadow-lg dark:focus:shadow-lg dark:active:shadow-md"
+                className="inline-block rounded bg-[#6440FA] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-[#4f3c9e] hover:shadow-lg focus:bg-[#4f3c9e]focus:shadow-lg focus:outline-none focus:ring-0 active:bg-[#4f3c9e] active:shadow-lg dark:shadow-md dark:hover:shadow-lg dark:focus:shadow-lg dark:active:shadow-md"
               >
                 Login
               </NavLink>

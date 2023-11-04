@@ -1,7 +1,9 @@
+import Banar from "./Banar/Banar";
+
 function Home() {
   return (
     <div className="min-h-screen">
-      <h2>this is Home</h2>
+      <Banar></Banar>
     </div>
   );
 }
