@@ -24,6 +24,10 @@ function Home() {
   return (
     <div className="min-h-screen">
       <Banar></Banar>
+      <SectionDividerWithText
+        title="Featured Section"
+        description="Discover our amazing features and services."
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-3 ">
         {data.map((item) => (
