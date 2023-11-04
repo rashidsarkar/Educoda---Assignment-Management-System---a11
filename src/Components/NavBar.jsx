@@ -60,12 +60,12 @@ function NavBar() {
         </a>
       </div>
       <div className="hidden navbar-center lg:flex">
-        <ul className="inline-flex flex-row flex-wrap gap-3 p-2 px-1 text-xl font-semibold menuu menuu-horizontal">
+        <ul className="inline-flex flex-row flex-wrap p-2 px-1 space-x-4 text-xl font-semibold menuu menuu-horizontal">
           {navLinks}
         </ul>
       </div>
 
-      <div className="navbar-end">
+      <div className="justify-center navbar-end">
         {user ? (
           // User is authenticated, show user menu
           <div className="dropdown dropdown-end">
