@@ -9,8 +9,16 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import useAuthProvider from "../../FireBase/useAuthProvider";
+import Swal from "sweetalert2";
+import axiosInstance from "../../AxiosAPI/axiosInstance";
+import {
+  QueryClient,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 function AssignmentCard({ assignment }) {
+  const queryClient = useQueryClient();
   const { user } = useAuthProvider();
   const {
     title,
@@ -35,12 +43,56 @@ function AssignmentCard({ assignment }) {
     backgroundColor: isCurrentUser ? "green" : "gray",
     borderRadius: "4px",
   };
+  const deleteButtonStyle = {
+    flex: "1",
+    display: "flex",
+    alignItems: "center",
+    padding: "8px 16px",
+    color: "white",
+    transition: "background 0.3s",
+    backgroundColor: isCurrentUser ? "red" : "gray",
+    borderRadius: "4px",
+  };
+  const { mutateAsync } = useMutation({
+    mutationFn: async (id) => {
+      const res = await axiosInstance.delete(
+        `/api/delete-my-assignments/${id}`
+      );
+      return res.data;
+    },
+    // mutationKey: ["bookingData"],
 
+    onSuccess: () => {
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Assignment has been deleted successfully.",
+      });
+      // QueryClient.invalidateQueries(["create-assignments"]);
+      queryClient.invalidateQueries("create-assignments");
+    },
+  });
+
+  const handleDelete = (itemId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Trigger the mutation to delete the assignment
+        mutateAsync(itemId);
+      }
+    });
+  };
   let tooltipContent = "You are not the creator of this assignment";
   if (isCurrentUser) {
     tooltipContent = null; // No content if the user is the creator
   }
-
   return (
     <div className="flex mb-4 bg-white border border-gray-200 rounded-lg shadow hover-bg-gray-100 dark-border-gray-700 dark-bg-gray-800 dark-hover-bg-gray-700">
       <img
@@ -81,8 +133,12 @@ function AssignmentCard({ assignment }) {
               Update Assignment
             </button>
           </Link>
-          <Link>
-            <button className="flex items-center px-4 py-2 text-white transition duration-300 bg-red-500 rounded-md hover-bg-red-600">
+          <Link className="tooltip" data-tip={tooltipContent}>
+            <button
+              onClick={() => handleDelete(_id)}
+              disabled={!isCurrentUser}
+              style={deleteButtonStyle}
+            >
               <FontAwesomeIcon icon={faTrash} className="w-5 h-5 mr-2" />
               Delete Assignment
             </button>
