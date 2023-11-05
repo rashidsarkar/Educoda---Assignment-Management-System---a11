@@ -1,11 +1,21 @@
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import ButtonCustom from "../../Components/ButtonCustom";
 import "./assignmentCreate.css";
 
 function AssignmentCreate() {
+  const [dueDate, setDueDate] = useState(null);
+
+  const handleDateChange = (date) => {
+    setDueDate(date);
+  };
+
   return (
     <div className="pt-[200px]">
       <div className="assignment-nav-wrap">
         <ul className="nav nav-pills" id="pills-tab-1" role="tablist">
-          <li className="nav-item" role="presentation">
+          <li className="nav-item" role-presentation>
             <button
               className="nav-link active"
               id="pills-five-tab"
@@ -25,39 +35,75 @@ function AssignmentCreate() {
         <form action="index.html">
           <div className="row">
             <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
-              <input type="text" placeholder="Enter Your Name" />
-            </div>
-            <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
+              <label htmlFor="title">Title:</label>
               <input
                 type="text"
-                id="datepicker"
-                placeholder="Due Date mm/dd/yyyy"
-                className="hasDatepicker"
+                id="title"
+                name="title"
+                className="block w-full mt-1"
+                placeholder="Title"
+              />
+            </div>
+
+            {/* Other input fields */}
+            <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
+              <label htmlFor="difficulty">Difficulty Level:</label>
+              <select
+                id="difficulty"
+                name="difficulty"
+                className="block w-full mt-1 h-[50px] pl-6 rounded text-[#777777]"
+              >
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+            </div>
+            {/* Other input fields */}
+            <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
+              <label htmlFor="marks">Marks:</label>
+              <input
+                type="text"
+                id="marks"
+                name="marks"
+                className="block w-full mt-1"
+                placeholder="Marks"
               />
             </div>
             <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
-              <input type="email" placeholder="webinfo@gmail.com" />
+              <label htmlFor="thumbnail">Thumbnail Image URL:</label>
+              <input
+                type="email"
+                id="thumbnail"
+                name="thumbnail"
+                className="block w-full mt-1"
+                placeholder="Thumbnail Image URL"
+              />
             </div>
-            <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
-              <div className="input-file-upload position-relative">
-                <input type="file" />
-                <img src="assets/images/icon/upload-icon-2.png" alt="" />
-                <span>Assignment Files Upload</span>
-              </div>
+            <div className="col-xl-100 col-xl-6 col-lg-9 col-sm-12 col-12">
+              <label htmlFor="description">Description:</label>
+              <input
+                type="text"
+                id="description"
+                name="description"
+                className="block w-full mt-1"
+                placeholder="Description"
+              />
             </div>
-            <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
-              <input type="text" placeholder="Subject Name" />
+            <div className="flex flex-wrap col-xl-6 col-lg-6 col-sm-12 col-12">
+              <label htmlFor="datepicker">Due Date:</label>
+              <DatePicker
+                id="datepicker"
+                name="dueDate"
+                selected={dueDate}
+                onChange={handleDateChange}
+                className="block w-full mt-1"
+                placeholderText="Due Date mm/dd/yyyy"
+              />
             </div>
-            <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
-              <input type="text" placeholder="School Name" />
-            </div>
-            <div className="col-xl-10 col-lg-9 col-sm-12 col-12">
-              <input type="text" placeholder="Message" />
-            </div>
-            <div className="col-xl-2 col-lg-3 col-sm-12 col-12">
+            <div className="flex items-center justify-end w-full col-xl-2 col-lg-3 col-sm-12 col-12">
               <div className="text-center assignment-btn-wrap">
-                <button type="submit" className="assignment-btn">
-                  Let’s start +
+                <button type="submit" className=" assignment-btn">
+                  Submit
                 </button>
               </div>
             </div>

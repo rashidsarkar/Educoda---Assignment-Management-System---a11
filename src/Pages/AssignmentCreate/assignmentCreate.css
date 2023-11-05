@@ -101,22 +101,16 @@
   margin-bottom: 0;
 }
 
-.assignment-form-wrap form .assignment-btn-wrap button {
+.assignment-btn-wrap button {
   border: none;
   background: #6440fa;
   border-radius: 5px;
   width: 100%;
-  font-family: "Nunito", sans-serif;
   font-weight: 700;
   font-size: 18px;
   text-transform: capitalize;
   color: #ffffff;
-  padding: 11px 10px;
-  transition: all 1s ease 0s;
-}
-
-.assignment-form-wrap form .assignment-btn-wrap button:hover {
-  background: #a86500;
+  padding: 11px 35px;
 }
 
 .row {
@@ -139,7 +133,9 @@
   flex: 0 0 auto;
   width: 83.3333333333%;
 }
-
 .text-center {
   text-align: center;
+}
+.react-datepicker-wrapper {
+  width: 100%;
 }
