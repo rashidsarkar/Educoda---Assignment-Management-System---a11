@@ -44,7 +44,7 @@ function AllAssignments() {
   if (isLoading) {
     return <CustomLoading></CustomLoading>;
   }
-  console.log(allAssignments);
+  // console.log(allAssignments);
 
   return (
     <div className="min-h-screen pt-[200px]">

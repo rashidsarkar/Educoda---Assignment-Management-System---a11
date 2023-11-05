@@ -1,12 +1,13 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { SiGoogle } from "react-icons/si";
-import useAuthProvider from "../../FireBase/useAuthProvider";
 import swal from "sweetalert";
+import { AuthContext } from "../../FireBase/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const { singupWithEmalPass, googleSing, user, setUser, updateProfiles } =
-    useAuthProvider();
-
+    useContext(AuthContext);
   const navigat = useNavigate();
   const preveLocation = useLocation();
 
@@ -26,6 +27,18 @@ function SignUp() {
         "Password must be at least 6 characters.",
         "error"
       );
+    } else if (!/[A-Z]/.test(password)) {
+      swal(
+        "Password Error",
+        "Password must contain at least one capital letter.",
+        "error"
+      );
+    } else if (!/[!@#$%^&*()_+[\]{};':"\\|,.<>?~]/.test(password)) {
+      swal(
+        "Password Error",
+        "Password must contain at least one special character.",
+        "error"
+      );
     } else {
       singupWithEmalPass(email, password)
         .then((currentUser) => {
@@ -43,7 +56,7 @@ function SignUp() {
               console.log(currentUser.user);
               console.log(user);
             })
-            .catch();
+            .catch(() => {});
 
           // console.log(user.user);
         })
@@ -52,7 +65,7 @@ function SignUp() {
           console.log(error.message);
         });
     }
-    // event.currentTarget.reset();
+    // event.currentTarget reset();
   };
 
   const handleGoogleSignUp = () => {
@@ -67,8 +80,8 @@ function SignUp() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white py-[150px]">
-      <div className="p-8 text-white bg-gray-800 rounded-lg shadow-md w-96">
+    <div className="flex items-center justify-center min-h-screen py-[150px] my-4">
+      <div className="p-8 rounded-lg bg-gray-300 shadow-md w-96">
         <h2 className="text-3xl font-semibold text-center mb-6 text-[#FF444A]">
           Create an Account
         </h2>
@@ -77,7 +90,7 @@ function SignUp() {
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-300"
+                className="block text-sm font-medium text-gray-600"
               >
                 Full Name
               </label>
@@ -85,14 +98,14 @@ function SignUp() {
                 type="text"
                 id="name"
                 name="name"
-                className="mt-1 p-3 block w-full rounded-md bg-gray-700 text-gray-300 focus:ring focus:ring-[#FF444A] focus:ring-opacity-50"
+                className="mt-1 p-3 block w-full rounded-md bg-gray-200 text-gray-800 focus:ring focus:ring-[#FF444A] focus:ring-opacity-50"
                 required
               />
             </div>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-300"
+                className="block text-sm font-medium text-gray-600"
               >
                 Email Address
               </label>
@@ -100,7 +113,7 @@ function SignUp() {
                 type="email"
                 id="email"
                 name="email"
-                className="mt-1 p-3 block w-full rounded-md bg-gray-700 text-gray-300 focus:ring focus:ring-[#FF444A] focus:ring-opacity-50"
+                className="mt-1 p-3 block w-full rounded-md bg-gray-200 text-gray-800 focus:ring focus:ring-[#FF444A] focus:ring-opacity-50"
                 required
               />
             </div>
@@ -108,7 +121,7 @@ function SignUp() {
           <div className="mt-6">
             <label
               htmlFor="image"
-              className="block text-sm font-medium text-gray-300"
+              className="block text-sm font-medium text-gray-600"
             >
               Profile Image (Link)
             </label>
@@ -116,13 +129,13 @@ function SignUp() {
               type="text"
               id="image"
               name="image"
-              className="mt-1 p-3 block w-full rounded-md bg-gray-700 text-gray-300 focus:ring focus:ring-[#FF444A] focus:ring-opacity-50"
+              className="mt-1 p-3 block w-full rounded-md bg-gray-200 text-gray-800 focus:ring focus:ring-[#FF444A] focus:ring-opacity-50"
             />
           </div>
           <div className="mt-6">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-300"
+              className="block text-sm font-medium text-gray-600"
             >
               Password
             </label>
@@ -130,7 +143,7 @@ function SignUp() {
               type="password"
               id="password"
               name="password"
-              className="mt-1 p-3 block w-full rounded-md bg-gray-700 text-gray-300 focus:ring focus:ring-[#FF444A] focus:ring-opacity-50"
+              className="mt-1 p-3 block w-full rounded-md bg-gray-200 text-gray-800 focus:ring focus:ring-[#FF444A] focus:ring-opacity-50"
               required
             />
           </div>
@@ -141,8 +154,8 @@ function SignUp() {
             Sign Up
           </button>
         </form>
-        <p className="mt-4 text-center text-gray-300">
-          <span className="text-sm text-gray-400">or</span>
+        <p className="mt-4 text-center">
+          <span className="text-sm">or</span>
         </p>
         <button
           onClick={handleGoogleSignUp}
@@ -151,7 +164,7 @@ function SignUp() {
           <SiGoogle className="w-6 h-6 mr-2" />
           Sign Up with Google
         </button>
-        <p className="mt-4 text-center text-gray-300">
+        <p className="mt-4 text-center">
           Already have an account?{" "}
           <Link to="/login" className="text-[#FF444A] hover:underline">
             Login

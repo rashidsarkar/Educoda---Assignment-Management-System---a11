@@ -6,6 +6,7 @@ import "./assignmentCreate.css";
 import useAuthProvider from "../../FireBase/useAuthProvider";
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../../AxiosAPI/axiosInstance";
+import { format, parse } from "date-fns";
 import swal from "sweetalert";
 import Swal from "sweetalert2";
 
@@ -16,6 +17,7 @@ function AssignmentCreate() {
   const [dueDate, setDueDate] = useState(null);
   const handleDateChange = (date) => {
     setDueDate(date); // Update dueDate when the date changes
+    console.log(dueDate);
   };
 
   const { mutateAsync } = useMutation({
@@ -146,10 +148,11 @@ function AssignmentCreate() {
                 id="datepicker"
                 name="dueDate"
                 required
+                dateFormat="dd/MM/yyyy"
                 selected={dueDate}
                 onChange={handleDateChange}
                 className="block w-full mt-1"
-                placeholderText="Due Date "
+                placeholderText="Due Date"
               />
             </div>
             <div className="flex items-center justify-end w-full col-xl-2 col-lg-3 col-sm-12 col-12">

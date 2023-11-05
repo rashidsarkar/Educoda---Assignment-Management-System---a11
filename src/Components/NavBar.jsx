@@ -39,7 +39,7 @@ function NavBar() {
       <li></li>
     </>
   );
-
+  console.log(user?.photoURL);
   return (
     <div className="absolute left-0 right-0 z-50 w-full mx-auto text-white rounded-b-none bg-slate-800 max-w-7xl h-28 navbar">
       <div className="w-full lg:w-[50%] navbar-start ">

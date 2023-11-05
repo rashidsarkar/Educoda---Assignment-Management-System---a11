@@ -16,11 +16,7 @@ function UpdateAssignment() {
   const { user } = useAuthProvider();
   const { idx } = useParams();
   console.log(idx);
-  let email = user.email;
-  const [dueDate, setDueDate] = useState(null);
-  const handleDateChange = (date) => {
-    setDueDate(date); // Update dueDate when the date changes
-  };
+  // let email = user.email;
 
   const {
     data: UpdatedAssignment,
@@ -35,28 +31,33 @@ function UpdateAssignment() {
 
   // Assuming UpdatedAssignment contains assignment data
   const assignmentData = UpdatedAssignment?.data || {};
-  console.log(assignmentData);
+
+  const [dueDate, setDueDate] = useState(null);
+  const handleDateChange = (date) => {
+    setDueDate(date); // Update dueDate when the date changes
+  };
 
   const { mutateAsync } = useMutation({
     mutationFn: async (postData) => {
-      const result = await axiosInstance.post(
-        "/api/create-assignments",
+      const result = await axiosInstance.put(
+        `/api/updated-my-assignments/${idx}`,
         postData
       );
       console.log(result.data);
+      if (result.data.modifiedCount) {
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: "Assignment has been updated successfully.",
+        });
+      }
       return result.data;
     },
     mutationKey: ["create-assignments"],
-    onSuccess: () => {
-      Swal.fire({
-        icon: "success",
-        title: "Success!",
-        text: "Assignment has been updated successfully.",
-      });
-    },
+    onSuccess: () => {},
   });
 
-  const handleSubAssignment = async (e) => {
+  const handleUpdatedAssignment = async (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const title = form.get("title");
@@ -71,7 +72,6 @@ function UpdateAssignment() {
       thumbnail,
       description,
       dueDate,
-      email,
     };
     try {
       await mutateAsync(assignmentInfo);
@@ -86,11 +86,12 @@ function UpdateAssignment() {
   if (isLoading) {
     return <CustomLoading></CustomLoading>;
   }
+  let date = UpdatedAssignment?.data.dueDate;
   return (
     <div className="pt-[200px]">
       <div className="assignment-nav-wrap">
         <ul className="nav nav-pills" id="pills-tab-1" role="tablist">
-          <li className="nav-item" role-presentation>
+          <li className="nav-item">
             <button
               className="nav-link active"
               id="pills-five-tab"
@@ -106,7 +107,7 @@ function UpdateAssignment() {
         </ul>
       </div>
       <div className="p-8 assignment-form-wrap bg-[#DCDAE7]">
-        <form onSubmit={handleSubAssignment}>
+        <form onSubmit={handleUpdatedAssignment}>
           <div className="row">
             <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
               <label htmlFor="title">Title:</label>
@@ -117,7 +118,7 @@ function UpdateAssignment() {
                 name="title"
                 className="block w-full mt-1"
                 placeholder="Title"
-                value={assignmentData.title || ""}
+                defaultValue={assignmentData.title || ""}
               />
             </div>
             <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
@@ -126,7 +127,7 @@ function UpdateAssignment() {
                 id="difficulty"
                 name="difficulty"
                 className="block w-full mt-1 h-[50px] pl-6 rounded text-[#777777]"
-                value={assignmentData.difficulty || "Easy"}
+                defaultValue={assignmentData.difficulty || "Easy"}
               >
                 <option value="Easy">Easy</option>
                 <option value="Medium">Medium</option>
@@ -142,7 +143,7 @@ function UpdateAssignment() {
                 required
                 className="block w-full mt-1"
                 placeholder="Marks"
-                value={assignmentData.marks || ""}
+                defaultValue={assignmentData.marks || ""}
               />
             </div>
             <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
@@ -153,7 +154,7 @@ function UpdateAssignment() {
                 required
                 className="block w-full mt-1"
                 placeholder="Thumbnail Image URL"
-                value={assignmentData.thumbnail || ""}
+                defaultValue={assignmentData.thumbnail || ""}
               />
             </div>
             <div className="col-xl-100 col-xl-6 col-lg-9 col-sm-12 col-12">
@@ -165,7 +166,7 @@ function UpdateAssignment() {
                 name="description"
                 className="block w-full mt-1"
                 placeholder="Description"
-                value={assignmentData.description || ""}
+                defaultValue={assignmentData.description || ""}
               />
             </div>
             <div className="flex flex-wrap col-xl-6 col-lg-6 col-sm-12 col-12">
@@ -173,17 +174,18 @@ function UpdateAssignment() {
               <DatePicker
                 id="datepicker"
                 name="dueDate"
+                onChange={handleDateChange}
                 required
                 selected={dueDate}
-                onChange={handleDateChange}
                 className="block w-full mt-1"
-                placeholderText="Due Date"
+                placeholderText={` ${dueDate || date}`}
+                dateFormat="yyyy/MM/dd"
               />
             </div>
             <div className="flex items-center justify-end w-full col-xl-2 col-lg-3 col-sm-12 col-12">
               <div className="text-center assignment-btn-wrap">
                 <button type="submit" className="assignment-btn">
-                  Submit
+                  Update
                 </button>
               </div>
             </div>
