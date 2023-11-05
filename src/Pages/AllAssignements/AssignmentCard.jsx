@@ -6,10 +6,20 @@ import {
   faEdit,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import useAuthProvider from "../../FireBase/useAuthProvider";
 
 function AssignmentCard({ assignment }) {
-  const { title, difficulty, marks, thumbnail, description, dueDate } =
-    assignment;
+  const { user } = useAuthProvider();
+  const {
+    title,
+    difficulty,
+    marks,
+    thumbnail,
+    description,
+    dueDate,
+    email,
+    _id,
+  } = assignment;
 
   return (
     <div className="flex mb-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -19,7 +29,7 @@ function AssignmentCard({ assignment }) {
         alt={title}
       />
       <div className="w-3/4 p-4">
-        <h2 className="mb-2 text-3xl font-bold text-gray-900 dark:text-white">
+        <h2 className="mb-2 text-3xl italic font-bold text-gray-900 dark:text-white">
           {title}
         </h2>
         <p className="mb-3 text-sm text-gray-700 dark:text-gray-400">
@@ -41,7 +51,7 @@ function AssignmentCard({ assignment }) {
               Take Assignment
             </button>
           </Link>
-          <Link>
+          <Link to={`/updateassignment/${_id}`}>
             <button className="flex items-center px-4 py-2 text-white transition duration-300 bg-green-500 rounded-md hover-bg-green-600">
               <FontAwesomeIcon icon={faEdit} className="w-5 h-5 mr-2" />
               Update Assignment

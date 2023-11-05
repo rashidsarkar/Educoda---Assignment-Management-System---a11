@@ -2,21 +2,40 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ButtonCustom from "../../Components/ButtonCustom";
-import "./assignmentCreate.css";
+
 import useAuthProvider from "../../FireBase/useAuthProvider";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../AxiosAPI/axiosInstance";
 import swal from "sweetalert";
 import Swal from "sweetalert2";
+import { useParams } from "react-router-dom";
+import { updateCurrentUser } from "firebase/auth";
+import CustomLoading from "../../Components/CustomLoading";
 
-function AssignmentCreate() {
+function UpdateAssignment() {
   const { user } = useAuthProvider();
-  // console.log(user.email);
+  const { idx } = useParams();
+  console.log(idx);
   let email = user.email;
   const [dueDate, setDueDate] = useState(null);
   const handleDateChange = (date) => {
     setDueDate(date); // Update dueDate when the date changes
   };
+
+  const {
+    data: UpdatedAssignment,
+    isLoading,
+    error,
+    refetch, // Get the refetch function
+  } = useQuery({
+    queryKey: ["create-assignments", idx],
+    queryFn: () =>
+      axiosInstance.get(`http://localhost:5000/api/updated-assignments/${idx}`),
+  });
+
+  // Assuming UpdatedAssignment contains assignment data
+  const assignmentData = UpdatedAssignment?.data || {};
+  console.log(assignmentData);
 
   const { mutateAsync } = useMutation({
     mutationFn: async (postData) => {
@@ -32,10 +51,11 @@ function AssignmentCreate() {
       Swal.fire({
         icon: "success",
         title: "Success!",
-        text: "Assignments has been made successfully.",
+        text: "Assignment has been updated successfully.",
       });
     },
   });
+
   const handleSubAssignment = async (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -59,6 +79,13 @@ function AssignmentCreate() {
       console.log(err);
     }
   };
+  if (error) {
+    return error.message;
+  }
+
+  if (isLoading) {
+    return <CustomLoading></CustomLoading>;
+  }
   return (
     <div className="pt-[200px]">
       <div className="assignment-nav-wrap">
@@ -69,12 +96,11 @@ function AssignmentCreate() {
               id="pills-five-tab"
               data-bs-toggle="pill"
               data-bs-target="#pills-five"
-              // type="button"
               role="tab"
               aria-controls="pills-five"
               aria-selected="true"
             >
-              Create Assignments
+              Update Assignment
             </button>
           </li>
         </ul>
@@ -91,23 +117,22 @@ function AssignmentCreate() {
                 name="title"
                 className="block w-full mt-1"
                 placeholder="Title"
+                value={assignmentData.title || ""}
               />
             </div>
-
-            {/* Other input fields */}
             <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
               <label htmlFor="difficulty">Difficulty Level:</label>
               <select
                 id="difficulty"
                 name="difficulty"
                 className="block w-full mt-1 h-[50px] pl-6 rounded text-[#777777]"
+                value={assignmentData.difficulty || "Easy"}
               >
                 <option value="Easy">Easy</option>
                 <option value="Medium">Medium</option>
                 <option value="Hard">Hard</option>
               </select>
             </div>
-            {/* Other input fields */}
             <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
               <label htmlFor="marks">Marks:</label>
               <input
@@ -117,6 +142,7 @@ function AssignmentCreate() {
                 required
                 className="block w-full mt-1"
                 placeholder="Marks"
+                value={assignmentData.marks || ""}
               />
             </div>
             <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
@@ -127,6 +153,7 @@ function AssignmentCreate() {
                 required
                 className="block w-full mt-1"
                 placeholder="Thumbnail Image URL"
+                value={assignmentData.thumbnail || ""}
               />
             </div>
             <div className="col-xl-100 col-xl-6 col-lg-9 col-sm-12 col-12">
@@ -138,6 +165,7 @@ function AssignmentCreate() {
                 name="description"
                 className="block w-full mt-1"
                 placeholder="Description"
+                value={assignmentData.description || ""}
               />
             </div>
             <div className="flex flex-wrap col-xl-6 col-lg-6 col-sm-12 col-12">
@@ -149,12 +177,12 @@ function AssignmentCreate() {
                 selected={dueDate}
                 onChange={handleDateChange}
                 className="block w-full mt-1"
-                placeholderText="Due Date "
+                placeholderText="Due Date"
               />
             </div>
             <div className="flex items-center justify-end w-full col-xl-2 col-lg-3 col-sm-12 col-12">
               <div className="text-center assignment-btn-wrap">
-                <button type="submit" className=" assignment-btn">
+                <button type="submit" className="assignment-btn">
                   Submit
                 </button>
               </div>
@@ -166,4 +194,4 @@ function AssignmentCreate() {
   );
 }
 
-export default AssignmentCreate;
+export default UpdateAssignment;
