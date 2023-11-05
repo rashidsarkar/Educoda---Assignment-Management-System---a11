@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 function NavBar() {
@@ -12,7 +13,7 @@ function NavBar() {
         <NavLink>Assignments</NavLink>
       </li>
       <li>
-        <NavLink>Create Assignments</NavLink>
+        <NavLink to="/assignmentCreate">Create Assignments</NavLink>
       </li>
       <li>
         <NavLink>My Assignments</NavLink>
@@ -25,7 +26,7 @@ function NavBar() {
   );
 
   return (
-    <div className="absolute left-0 right-0 z-50 w-full mx-auto text-white rounded-b-none max-w-7xl h-28 navbar">
+    <div className="absolute left-0 right-0 z-50 w-full mx-auto text-white rounded-b-none bg-slate-800 max-w-7xl h-28 navbar">
       <div className="w-full lg:w-[50%] navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
