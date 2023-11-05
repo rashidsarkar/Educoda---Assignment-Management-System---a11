@@ -4,8 +4,10 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../../AxiosAPI/axiosInstance";
 import Swal from "sweetalert2";
+import useAuthProvider from "../../FireBase/useAuthProvider";
 
 const TakeAssignmentModal = ({ viewAssignment }) => {
+  const { user } = useAuthProvider();
   const {
     title,
     difficulty,
@@ -55,6 +57,7 @@ const TakeAssignmentModal = ({ viewAssignment }) => {
       pdf,
       notes,
       status: "pending",
+      examineeName: user.displayName,
     };
     try {
       await mutateAsync(submitedInfo);

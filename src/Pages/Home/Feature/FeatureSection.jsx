@@ -8,7 +8,7 @@ import CustomLoading from "../../../Components/CustomLoading";
 function FeatureSection({ feature }) {
   const { date, title, description, image } = feature;
   useEffect(() => {
-    VanillaTilt.init(document.querySelectorAll(".card"), {
+    VanillaTilt.init(document.querySelectorAll(".carda"), {
       glare: true,
       reverse: true,
       "max-glare": 0.5,
@@ -21,7 +21,7 @@ function FeatureSection({ feature }) {
 
   return (
     <div className="mx-4 md:mx-0 cards-container">
-      <div className="m-2 mx-auto card lg:m-7 md:m-3 ">
+      <div className="m-2 mx-auto carda lg:m-7 md:m-3 ">
         <div style={cardStyle} className="card-image quiz-image"></div>
         <div className="card-text">
           <span className="date">{date}</span>

@@ -34,7 +34,7 @@ function NavBar() {
         <NavLink>My Assignments</NavLink>
       </li>
       <li>
-        <NavLink>Submitted Assignments</NavLink>
+        <NavLink to="/submittedAssignments">Submitted Assignments</NavLink>
       </li>
       <li></li>
     </>
