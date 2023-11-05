@@ -6,9 +6,9 @@ import "./assignmentCreate.css";
 
 function AssignmentCreate() {
   const [dueDate, setDueDate] = useState(null);
-
-  const handleDateChange = (date) => {
-    setDueDate(date);
+  const handleSubAssignment = (e) => {
+    e.preventDefault();
+    console.log("ok ");
   };
 
   return (
@@ -32,7 +32,7 @@ function AssignmentCreate() {
         </ul>
       </div>
       <div className="p-8 assignment-form-wrap bg-[#DCDAE7]">
-        <form action="index.html">
+        <form onSubmit={handleSubAssignment}>
           <div className="row">
             <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
               <label htmlFor="title">Title:</label>
@@ -95,7 +95,7 @@ function AssignmentCreate() {
                 id="datepicker"
                 name="dueDate"
                 selected={dueDate}
-                onChange={handleDateChange}
+                onChange={() => setDueDate(date)}
                 className="block w-full mt-1"
                 placeholderText="Due Date mm/dd/yyyy"
               />

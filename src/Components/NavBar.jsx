@@ -1,8 +1,22 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import useAuthProvider from "../FireBase/useAuthProvider";
 
 function NavBar() {
-  const user = false; // Replace with your actual authentication logic
+  // Replace with your actual authentication logic
+
+  const { user, logOut } = useAuthProvider();
+
+  const handleSingOut = () => {
+    logOut()
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
+  };
 
   const navLinks = (
     <>
@@ -27,7 +41,7 @@ function NavBar() {
 
   return (
     <div className="absolute left-0 right-0 z-50 w-full mx-auto text-white rounded-b-none bg-slate-800 max-w-7xl h-28 navbar">
-      <div className="w-full lg:w-[50%] navbar-start">
+      <div className="w-full lg:w-[50%] navbar-start ">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
@@ -60,13 +74,13 @@ function NavBar() {
           />
         </a>
       </div>
-      <div className="hidden navbar-center lg:flex">
+      <div className="hidden navbar-center lg:flex lg:ml-[100px]">
         <ul className="inline-flex flex-row flex-wrap p-2 px-1 space-x-4 text-xl font-semibold menuu menuu-horizontal">
           {navLinks}
         </ul>
       </div>
 
-      <div className="justify-center navbar-end">
+      <div className="justify-end navbar-end">
         {user ? (
           // User is authenticated, show user menu
           <div className="dropdown dropdown-end">
@@ -91,7 +105,7 @@ function NavBar() {
               </li>
 
               <li className="mx-auto text-center text-pink-600">
-                <Link>Logout</Link>
+                <Link onClick={handleSingOut}>Logout</Link>
               </li>
             </ul>
           </div>

@@ -1,6 +1,8 @@
 import { useContext } from "react";
 
 import { Navigate, useLocation } from "react-router-dom";
+import { AuthContext } from "../FireBase/AuthProvider";
+import CustomLoading from "../Components/CustomLoading";
 
 function PrivateRoute({ children }) {
   const location = useLocation();
@@ -8,7 +10,7 @@ function PrivateRoute({ children }) {
   if (loading) {
     return (
       <div className="w-24 mx-auto loadd">
-        <span className="flex items-center justify-center min-h-screen bg-pink-500 loading loading-bars loading-lg"></span>
+        <CustomLoading></CustomLoading>
       </div>
     );
   }
