@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import useAuthProvider from "../FireBase/useAuthProvider";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 function NavBar() {
   // Replace with your actual authentication logic
@@ -24,7 +25,7 @@ function NavBar() {
         <NavLink>Home</NavLink>
       </li>
       <li>
-        <NavLink>Assignments</NavLink>
+        <NavLink to="/assignments">Assignments</NavLink>
       </li>
       <li>
         <NavLink to="/assignmentCreate">Create Assignments</NavLink>
@@ -85,10 +86,17 @@ function NavBar() {
           // User is authenticated, show user menu
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src={user.photoURL || "photoURL"} />
+              <div data-tooltip-id="my-tooltip-1" className="w-10 rounded-full">
+                <div className="text-white">
+                  <img src={user.photoURL || "photoURL"} />
+                </div>
               </div>
             </label>
+            <ReactTooltip
+              id="my-tooltip-1"
+              place="bottom"
+              content={user.displayName}
+            />
             <ul
               tabIndex={0}
               className="mt-3 w-[250px] z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box "

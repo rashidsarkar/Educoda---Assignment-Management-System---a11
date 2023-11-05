@@ -8,6 +8,7 @@ import NotFound from "../Pages/NotFound ";
 import Home from "../Pages/Home/Home";
 import AssignmentCreate from "../Pages/AssignmentCreate/AssignmentCreate";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import AllAssignements from "../Pages/AllAssignements/AllAssignements";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/assignments",
+        element: <AllAssignements></AllAssignements>,
       },
       {
         path: "/assignmentCreate",
