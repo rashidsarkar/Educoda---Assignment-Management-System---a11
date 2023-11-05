@@ -7,6 +7,7 @@ import {
   faCheckCircle,
   faEdit,
   faTrash,
+  faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import useAuthProvider from "../../FireBase/useAuthProvider";
 import Swal from "sweetalert2";
@@ -117,10 +118,10 @@ function AssignmentCard({ assignment }) {
           <span className="font-bold">Description:</span> {description}
         </p>
         <div className="flex mt-4 space-x-4">
-          <Link to="/assignment-details">
-            <button className="flex items-center px-4 py-2 text-white transition duration-300 bg-blue-500 rounded-md hover-bg-blue-600">
-              <FontAwesomeIcon icon={faCheckCircle} className="w-5 h-5 mr-2" />
-              Take Assignment
+          <Link to={`/assignmentDetails/${_id}`}>
+            <button className="flex items-center px-4 py-2 text-white transition duration-300 bg-[#4A07DA] rounded-md hover-bg-blue-600">
+              <FontAwesomeIcon icon={faEye} className="w-5 h-5 mr-2" />
+              View Assignment
             </button>
           </Link>
           <Link

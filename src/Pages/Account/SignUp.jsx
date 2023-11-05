@@ -81,7 +81,7 @@ function SignUp() {
 
   return (
     <div className="flex items-center justify-center min-h-screen py-[150px] my-4">
-      <div className="p-8 rounded-lg bg-gray-300 shadow-md w-96">
+      <div className="p-8 bg-gray-300 rounded-lg shadow-md w-96">
         <h2 className="text-3xl font-semibold text-center mb-6 text-[#FF444A]">
           Create an Account
         </h2>
@@ -126,7 +126,7 @@ function SignUp() {
               Profile Image (Link)
             </label>
             <input
-              type="text"
+              type="url"
               id="image"
               name="image"
               className="mt-1 p-3 block w-full rounded-md bg-gray-200 text-gray-800 focus:ring focus:ring-[#FF444A] focus:ring-opacity-50"

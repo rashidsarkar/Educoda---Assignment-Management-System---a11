@@ -113,7 +113,7 @@ function AssignmentCreate() {
             <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
               <label htmlFor="marks">Marks:</label>
               <input
-                type="text"
+                type="number"
                 id="marks"
                 name="marks"
                 required
@@ -126,6 +126,7 @@ function AssignmentCreate() {
               <input
                 id="thumbnail"
                 name="thumbnail"
+                type="url"
                 required
                 className="block w-full mt-1"
                 placeholder="Thumbnail Image URL"

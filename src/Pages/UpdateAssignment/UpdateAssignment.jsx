@@ -8,13 +8,14 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../AxiosAPI/axiosInstance";
 import swal from "sweetalert";
 import Swal from "sweetalert2";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { updateCurrentUser } from "firebase/auth";
 import CustomLoading from "../../Components/CustomLoading";
 
 function UpdateAssignment() {
   const { user } = useAuthProvider();
   const { idx } = useParams();
+  const navigate = useNavigate();
   console.log(idx);
   // let email = user.email;
 
@@ -50,6 +51,7 @@ function UpdateAssignment() {
           title: "Success!",
           text: "Assignment has been updated successfully.",
         });
+        navigate("/assignments");
       }
       return result.data;
     },
