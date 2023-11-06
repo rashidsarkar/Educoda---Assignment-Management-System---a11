@@ -69,7 +69,7 @@ function SubmittedAssignmentsCard({ submittedAssignments }) {
             onClick={() =>
               document.getElementById(`my_modal_${_id}`).showModal()
             }
-            className="text-white bg-blue-500 border-none outline-none btn btn-secondary hover-bg-blue-600"
+            className="text-white bg-blue-500 border-none outline-none btn btn-secondary hover:bg-blue-600"
           >
             <FontAwesomeIcon icon={faCheck} className="mr-2" />
             Give Mark

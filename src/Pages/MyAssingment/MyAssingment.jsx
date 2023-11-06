@@ -59,12 +59,13 @@ function MyAssingment() {
         </ul>
       </div>
       <div>
-        {myAssignments.map((assignment) => (
-          <MyAssingmentCard
-            assignment={assignment}
-            key={assignment._id}
-          ></MyAssingmentCard>
-        ))}
+        {myAssignments.length > 0 ? (
+          myAssignments.map((assignment) => (
+            <MyAssingmentCard assignment={assignment} key={assignment._id} />
+          ))
+        ) : (
+          <p>No assignments available.</p>
+        )}
       </div>
     </div>
   );
