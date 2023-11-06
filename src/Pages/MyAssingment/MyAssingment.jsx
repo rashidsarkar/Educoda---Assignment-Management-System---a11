@@ -11,13 +11,15 @@ import {
   faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import MyAssingmentCard from "./MyAssingmentCard";
+import CustomLoading from "../../Components/CustomLoading";
 function MyAssingment() {
   const queryClient = useQueryClient();
   const { user } = useAuthProvider();
-  console.log(user.email);
+  // console.log(user.email);
   const getData = async () => {
     const myData = await axiosInstance.get(
-      `/api/user/my-submitted-assignments?email=${user.email}`
+      // `/api/user/my-submitted-assignments?email=${user.email}`
+      `/api/user/my-submitted-assignments?examineeEmail=${user.email}`
     );
     return myData.data;
   };
@@ -29,13 +31,12 @@ function MyAssingment() {
     refetch, // Get the refetch function
   } = useQuery({
     queryFn: getData,
-    queryKey: ["Submitted-assignments"],
 
     onSuccess: queryClient.invalidateQueries("Submitted-assignments"),
   }); // Corrected the queryKey placement
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <CustomLoading></CustomLoading>;
   }
 
   if (error) {
@@ -43,7 +44,7 @@ function MyAssingment() {
   }
 
   const { title, marks, feedback, obtainmarks, thumbnail } = myAssignments;
-  console.log(myAssignments);
+  // console.log(myAssignments);
   return (
     <div className="pt-[150px]">
       <div className="assignment-nav-wrap">

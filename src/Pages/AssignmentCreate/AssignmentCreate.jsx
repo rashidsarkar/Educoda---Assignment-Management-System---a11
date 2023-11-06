@@ -2,22 +2,19 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ButtonCustom from "../../Components/ButtonCustom";
-import "./assignmentCreate.css";
 import useAuthProvider from "../../FireBase/useAuthProvider";
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../../AxiosAPI/axiosInstance";
-import { format, parse } from "date-fns";
-import swal from "sweetalert";
 import Swal from "sweetalert2";
+import "./assignmentCreate.css";
 
 function AssignmentCreate() {
   const { user } = useAuthProvider();
-  // console.log(user.email);
   let email = user.email;
   const [dueDate, setDueDate] = useState(null);
+
   const handleDateChange = (date) => {
-    setDueDate(date); // Update dueDate when the date changes
-    console.log(dueDate);
+    setDueDate(date);
   };
 
   const { mutateAsync } = useMutation({
@@ -26,7 +23,6 @@ function AssignmentCreate() {
         "/api/create-assignments",
         postData
       );
-      console.log(result.data);
       return result.data;
     },
     mutationKey: ["create-assignments"],
@@ -34,10 +30,11 @@ function AssignmentCreate() {
       Swal.fire({
         icon: "success",
         title: "Success!",
-        text: "Assignments has been made successfully.",
+        text: "Assignments have been created successfully.",
       });
     },
   });
+
   const handleSubAssignment = async (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -61,17 +58,17 @@ function AssignmentCreate() {
       console.log(err);
     }
   };
+
   return (
-    <div className="pt-[200px]">
+    <div className="pt-32">
       <div className="assignment-nav-wrap">
         <ul className="nav nav-pills" id="pills-tab-1" role="tablist">
-          <li className="nav-item" role-presentation>
+          <li className="nav-item" role="presentation">
             <button
               className="nav-link active"
               id="pills-five-tab"
               data-bs-toggle="pill"
               data-bs-target="#pills-five"
-              // type="button"
               role="tab"
               aria-controls="pills-five"
               aria-selected="true"
@@ -81,70 +78,74 @@ function AssignmentCreate() {
           </li>
         </ul>
       </div>
-      <div className="p-8 assignment-form-wrap bg-[#DCDAE7]">
+      <div className="p-8 bg-gray-200 assignment-form-wrap">
         <form onSubmit={handleSubAssignment}>
-          <div className="row">
-            <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
+          <div className="grid-cols-1 gap-4 md:grid md:grid-cols-2 lg:grid-cols-3">
+            <div className="mb-4">
               <label htmlFor="title">Title:</label>
               <input
                 type="text"
                 id="title"
                 required
                 name="title"
-                className="block w-full mt-1"
+                className="block w-full p-2 mt-1 border border-gray-300 rounded"
                 placeholder="Title"
               />
             </div>
 
-            {/* Other input fields */}
-            <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
+            <div className="mb-4">
               <label htmlFor="difficulty">Difficulty Level:</label>
               <select
                 id="difficulty"
                 name="difficulty"
-                className="block w-full mt-1 h-[50px] pl-6 rounded text-[#777777]"
+                className="block w-full p-2 mt-1 border border-gray-300 rounded"
               >
                 <option value="Easy">Easy</option>
                 <option value="Medium">Medium</option>
                 <option value="Hard">Hard</option>
               </select>
             </div>
-            {/* Other input fields */}
-            <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
+
+            <div className="mb-4">
               <label htmlFor="marks">Marks:</label>
               <input
                 type="number"
                 id="marks"
                 name="marks"
                 required
-                className="block w-full mt-1"
+                className="block w-full p-2 mt-1 border border-gray-300 rounded"
                 placeholder="Marks"
               />
             </div>
-            <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
+
+            <div className="mb-4">
               <label htmlFor="thumbnail">Thumbnail Image URL:</label>
               <input
                 id="thumbnail"
                 name="thumbnail"
                 type="url"
                 required
-                className="block w-full mt-1"
+                className="block w-full p-2 mt-1 border border-gray-300 rounded"
                 placeholder="Thumbnail Image URL"
               />
             </div>
-            <div className="col-xl-100 col-xl-6 col-lg-9 col-sm-12 col-12">
+
+            <div className="mb-4">
               <label htmlFor="description">Description:</label>
               <input
                 type="text"
                 id="description"
                 required
                 name="description"
-                className="block w-full mt-1"
+                className="block w-full p-2 mt-1 border border-gray-300 rounded"
                 placeholder="Description"
               />
             </div>
-            <div className="flex flex-wrap col-xl-6 col-lg-6 col-sm-12 col-12">
-              <label htmlFor="datepicker">Due Date:</label>
+
+            <div className="mb-4">
+              <label className="block" htmlFor="datepicker">
+                Due Date:
+              </label>
               <DatePicker
                 id="datepicker"
                 name="dueDate"
@@ -152,16 +153,18 @@ function AssignmentCreate() {
                 dateFormat="dd/MM/yyyy"
                 selected={dueDate}
                 onChange={handleDateChange}
-                className="block w-full mt-1"
+                className="block p-2 mt-1 border w-[-webkit-fill-available] border-gray-300 rounded lg:w-full"
                 placeholderText="Due Date"
               />
             </div>
-            <div className="flex items-center justify-end w-full col-xl-2 col-lg-3 col-sm-12 col-12">
-              <div className="text-center assignment-btn-wrap">
-                <button type="submit" className=" assignment-btn">
-                  Submit
-                </button>
-              </div>
+
+            <div className="flex items-center justify-start col-span-2">
+              <button
+                type="submit"
+                className="px-4 py-2 text-white bg-blue-500 rounded"
+              >
+                Submit
+              </button>
             </div>
           </div>
         </form>

@@ -22,24 +22,79 @@ function NavBar() {
   const navLinks = (
     <>
       <li>
-        <NavLink>Home</NavLink>
+        <NavLink
+          to="/"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-[#87af58] font-semibold"
+              : ""
+          }
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/assignments">Assignments</NavLink>
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-[#87af58] font-semibold"
+              : ""
+          }
+          to="/assignments"
+        >
+          Assignments
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/assignmentCreate">Create Assignments</NavLink>
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-[#87af58] font-semibold"
+              : ""
+          }
+          to="/assignmentCreate"
+        >
+          Create Assignments
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/myAssignments">My Assignments</NavLink>
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-[#87af58] font-semibold"
+              : ""
+          }
+          to="/myAssignments"
+        >
+          My Assignments
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/submittedAssignments">Submitted Assignments</NavLink>
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-[#87af58] font-semibold"
+              : ""
+          }
+          to="/submittedAssignments"
+        >
+          Submitted Assignments
+        </NavLink>
       </li>
       <li></li>
     </>
   );
-  console.log(user?.photoURL);
+  // console.log(user?.photoURL);
   return (
     <div className="absolute left-0 right-0 z-50 w-full mx-auto text-white rounded-b-none bg-slate-800 max-w-7xl h-28 navbar">
       <div className="w-full lg:w-[50%] navbar-start ">
@@ -62,7 +117,7 @@ function NavBar() {
           </label>
           <ul
             tabIndex={0}
-            className="menu  menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu  menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-slate-700 rounded-box w-52"
           >
             {navLinks}
           </ul>
@@ -85,34 +140,50 @@ function NavBar() {
         {user ? (
           // User is authenticated, show user menu
           <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            {/* <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div data-tooltip-id="my-tooltip-1" className="w-10 rounded-full">
                 <div className="text-white">
                   <img src={user.photoURL || "photoURL"} />
                 </div>
               </div>
-            </label>
-            <ReactTooltip
+            </label> */}
+            {/* <ReactTooltip
               id="my-tooltip-1"
               place="bottom"
               content={user.displayName}
-            />
+            /> */}
+            {/* <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img src={user.photoURL || "photoURL"} />
+              </div>
+            </label> */}
+            <div
+              className="cursor-pointer tooltip tooltip-left"
+              data-tip={user.displayName}
+            >
+              <div tabIndex={0} className="avatar">
+                <div className="w-12 rounded-full">
+                  <img src={user.photoURL || "photoURL"} />
+                </div>
+              </div>
+            </div>
+
             <ul
               tabIndex={0}
               className="mt-3 w-[250px] z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box "
             >
               <li>
                 <div className="flex flex-col px-4 py-3 ">
-                  <span className="block text-sm text-pink-600 dark:text-white">
+                  <span className="block text-sm text-[#503CA1] dark:text-white">
                     {user.displayName || "Display Name"}
                   </span>
-                  <span className="block text-sm text-pink-400 truncate dark:text-gray-400">
+                  <span className="block text-sm text-[#503CA1] truncate dark:text-gray-400">
                     {user.email || "Email"}
                   </span>
                 </div>
               </li>
 
-              <li className="mx-auto text-center text-pink-600">
+              <li className="mx-auto text-center text-[#503CA1]">
                 <Link onClick={handleSingOut}>Logout</Link>
               </li>
             </ul>

@@ -49,7 +49,7 @@
 .assignment-nav-wrap .nav-item {
   display: inline-block;
 }
-
+/*
 .assignment-form-wrap form {
   padding: 0 30px;
 }
@@ -126,7 +126,7 @@
 .col-xl-6 {
   flex: 0 0 auto;
   width: 48%;
-  /* margin: 0 10px;  */
+ 
 }
 
 .col-xl-10 {
@@ -138,4 +138,4 @@
 }
 .react-datepicker-wrapper {
   width: 100%;
-}
+} */

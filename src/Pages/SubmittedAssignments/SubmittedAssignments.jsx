@@ -1,8 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../../AxiosAPI/axiosInstance";
 import SubmittedAssignmentsCard from "./SubmittedAssignmentsCard";
+import useAuthProvider from "../../FireBase/useAuthProvider";
+import CustomLoading from "../../Components/CustomLoading";
 
 function SubmittedAssignments() {
+  const { user } = useAuthProvider();
+  // console.log(user.email);
   const getData = async () => {
     const myData = await axiosInstance.get(
       `/api/user/all-submitted-assignments`
@@ -21,7 +25,7 @@ function SubmittedAssignments() {
   }); // Corrected the queryKey placement
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <CustomLoading></CustomLoading>;
   }
 
   if (error) {
@@ -29,7 +33,7 @@ function SubmittedAssignments() {
   }
   return (
     <div className="min-h-screen py-[150px]">
-      <div className="grid lg:grid-cols-3">
+      <div className="grid grid-cols-1 lg:grid-cols-3">
         {submittedAssignments.map((item) => (
           <SubmittedAssignmentsCard
             submittedAssignments={item}

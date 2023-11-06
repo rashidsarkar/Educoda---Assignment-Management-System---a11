@@ -33,32 +33,32 @@ function SubmittedAssignmentsCard({ submittedAssignments }) {
     onSuccess: queryClient.invalidateQueries("Submitted-assignments"),
   });
   const handleGiveMark = async (assignmentInfo) => {
-    console.log(assignmentInfo);
+    // console.log(assignmentInfo);
     try {
       await mutateAsync(assignmentInfo);
     } catch (err) {
       console.log(err);
     }
     modalRef.current.close();
-    console.log("Assignment marked:", assignmentInfo);
+    // console.log("Assignment marked:", assignmentInfo);
   };
   // Handle giving a mark here
   // Make sure to handle the mutation and marking the assignment here
 
-  console.log(_id);
+  // console.log(_id);
   return (
-    <div className="bg-white rounded-lg shadow-lg w-96">
+    <div className="bg-white rounded-lg shadow-lg lg:w-96">
       <figure>
         <img src={thumbnail} alt={title} className="object-cover w-full h-40" />
       </figure>
       <div className="p-4">
-        <h2 className="text-xl font-semibold">{title}</h2>
-        <div className="flex justify-between text-lg text-gray-600">
+        <h2 className="text-3xl italic font-bold text-gray-600">{title}</h2>
+        <div className="text-lg text-gray-600 lg:flex lg:justify-between">
           <p>
             <span className="font-semibold">Marks:</span> {marks}
           </p>
-          <span className="mx-2">| |</span>
-          <p className="text-right">
+          <span className="hidden mx-2 lg:block">| |</span>
+          <p className="lg:text-right">
             <span className="font-semibold">Status:</span>{" "}
             <span className="capitalize">{status}</span>
           </p>

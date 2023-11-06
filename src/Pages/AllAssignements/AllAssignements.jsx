@@ -55,18 +55,20 @@ function AllAssignments() {
           role="tablist"
         >
           <li className="nav-item">
-            <button className="nav-link active">ALL Assignments</button>
+            <button className="text-left nav-link active">
+              ALL Assignments
+            </button>
           </li>
           <li className="flex items-center justify-between">
             <p className="nav-link active">Filter by Difficulty:</p>
             <select
               id="difficultyFilter"
-              className="px-2 py-1 border rounded-md"
+              className="py-1 border rounded-md lg:px-2  lg:w-auto w-[50px]"
               value={selectedDifficulty}
               onChange={(e) => handleDifficultyChange(e.target.value)}
             >
               {difficultyOptions.map((option) => (
-                <option key={option} value={option}>
+                <option className="" key={option} value={option}>
                   {option}
                 </option>
               ))}

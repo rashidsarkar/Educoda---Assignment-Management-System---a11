@@ -16,7 +16,7 @@ function Footer() {
             <p className="mb-2">Email: contact@Educoda.com</p>
             <p>Phone: +1 (123) 456-7890</p>
           </div>
-          <div>
+          <div className="flex justify-center lg:block">
             <img
               src="https://i.ibb.co/rQd3sFn/download.png"
               className=""
@@ -25,7 +25,7 @@ function Footer() {
           </div>
           <div className="mt-6">
             <h3 className="mb-4 text-2xl font-bold">Quick Links</h3>
-            <div className="flex gap-3">
+            <div className="flex justify-center gap-3">
               <Link
                 to="/"
                 className="text-lg text-white transition duration-300 hover:text-[#6440FA] block mb-2"

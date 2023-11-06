@@ -16,7 +16,7 @@ function UpdateAssignment() {
   const { user } = useAuthProvider();
   const { idx } = useParams();
   const navigate = useNavigate();
-  console.log(idx);
+  // console.log(idx);
   // let email = user.email;
 
   const {
@@ -26,8 +26,7 @@ function UpdateAssignment() {
     refetch, // Get the refetch function
   } = useQuery({
     queryKey: ["create-assignments", idx],
-    queryFn: () =>
-      axiosInstance.get(`http://localhost:5000/api/updated-assignments/${idx}`),
+    queryFn: () => axiosInstance.get(`api/updated-assignments/${idx}`),
   });
 
   // Assuming UpdatedAssignment contains assignment data
@@ -108,27 +107,27 @@ function UpdateAssignment() {
           </li>
         </ul>
       </div>
-      <div className="p-8 assignment-form-wrap bg-[#DCDAE7]">
+      <div className="p-8 bg-gray-200 assignment-form-wrap">
         <form onSubmit={handleUpdatedAssignment}>
-          <div className="row">
-            <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
+          <div className="grid-cols-1 gap-4 md:grid md:grid-cols-2 lg:grid-cols-3">
+            <div className="mb-4">
               <label htmlFor="title">Title:</label>
               <input
                 type="text"
                 id="title"
                 required
                 name="title"
-                className="block w-full mt-1"
+                className="block w-full p-2 mt-1 border border-gray-300 rounded"
                 placeholder="Title"
                 defaultValue={assignmentData.title || ""}
               />
             </div>
-            <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
+            <div className="mb-4">
               <label htmlFor="difficulty">Difficulty Level:</label>
               <select
                 id="difficulty"
                 name="difficulty"
-                className="block w-full mt-1 h-[50px] pl-6 rounded text-[#777777]"
+                className="block w-full p-2 mt-1 border border-gray-300 rounded"
                 defaultValue={assignmentData.difficulty || "Easy"}
               >
                 <option value="Easy">Easy</option>
@@ -136,60 +135,63 @@ function UpdateAssignment() {
                 <option value="Hard">Hard</option>
               </select>
             </div>
-            <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
+            <div className="mb-4">
               <label htmlFor="marks">Marks:</label>
               <input
                 type="text"
                 id="marks"
                 name="marks"
                 required
-                className="block w-full mt-1"
+                className="block w-full p-2 mt-1 border border-gray-300 rounded"
                 placeholder="Marks"
                 defaultValue={assignmentData.marks || ""}
               />
             </div>
-            <div className="col-xl-6 col-lg-6 col-sm-12 col-12">
+            <div className="mb-4">
               <label htmlFor="thumbnail">Thumbnail Image URL:</label>
               <input
                 id="thumbnail"
                 name="thumbnail"
                 required
-                className="block w-full mt-1"
+                className="block w-full p-2 mt-1 border border-gray-300 rounded"
                 placeholder="Thumbnail Image URL"
                 defaultValue={assignmentData.thumbnail || ""}
               />
             </div>
-            <div className="col-xl-100 col-xl-6 col-lg-9 col-sm-12 col-12">
+            <div className="mb-4">
               <label htmlFor="description">Description:</label>
               <input
                 type="text"
                 id="description"
                 required
                 name="description"
-                className="block w-full mt-1"
+                className="block w-full p-2 mt-1 border border-gray-300 rounded"
                 placeholder="Description"
                 defaultValue={assignmentData.description || ""}
               />
             </div>
-            <div className="flex flex-wrap col-xl-6 col-lg-6 col-sm-12 col-12">
-              <label htmlFor="datepicker">Due Date:</label>
+            <div className="mb-4">
+              <label htmlFor="datepicker" className="block">
+                Due Date:
+              </label>
               <DatePicker
                 id="datepicker"
                 name="dueDate"
                 onChange={handleDateChange}
                 required
                 selected={dueDate}
-                className="block w-full mt-1"
+                className="block p-2 mt-1 border w-[-webkit-fill-available] border-gray-300 rounded lg:w-full"
                 placeholderText={` ${dueDate || date}`}
                 dateFormat="yyyy/MM/dd"
               />
             </div>
-            <div className="flex items-center justify-end w-full col-xl-2 col-lg-3 col-sm-12 col-12">
-              <div className="text-center assignment-btn-wrap">
-                <button type="submit" className="assignment-btn">
-                  Update
-                </button>
-              </div>
+            <div className="flex items-center justify-start col-span-2">
+              <button
+                type="submit"
+                className="px-4 py-2 text-white bg-blue-500 rounded"
+              >
+                Update
+              </button>
             </div>
           </div>
         </form>

@@ -57,7 +57,7 @@ const TakeAssignmentModal = ({ viewAssignment }) => {
       pdf,
       notes,
       status: "pending",
-      examineeName: user.displayName,
+      examineeEmail: user.email,
     };
     try {
       await mutateAsync(submitedInfo);

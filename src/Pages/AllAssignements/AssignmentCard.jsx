@@ -95,13 +95,13 @@ function AssignmentCard({ assignment }) {
     tooltipContent = null; // No content if the user is the creator
   }
   return (
-    <div className="flex mb-4 bg-white border border-gray-200 rounded-lg shadow hover-bg-gray-100 dark-border-gray-700 dark-bg-gray-800 dark-hover-bg-gray-700">
+    <div className="grid grid-cols-[max-content] mb-4 bg-white border border-gray-200 rounded-lg shadow lg:flex hover-bg-gray-100 dark-border-gray-700 dark-bg-gray-800 dark-hover-bg-gray-700">
       <img
-        className="object-cover w-1/4 h-96 md:h-auto"
+        className="object-cover w-1/4 lg:h-96 md:h-auto"
         src={thumbnail}
         alt={title}
       />
-      <div className="w-3/4 p-4">
+      <div className="inline-block p-4 w-[200px] lg:w-3/4">
         <h2 className="mb-2 text-3xl italic font-bold text-gray-900 dark-text-white">
           {title}
         </h2>
@@ -117,9 +117,9 @@ function AssignmentCard({ assignment }) {
         <p className="text-sm text-gray-700 dark-text-gray-400">
           <span className="font-bold">Description:</span> {description}
         </p>
-        <div className="flex mt-4 space-x-4">
+        <div className="mt-4 space-y-2 lg:space-y-0 lg:space-x-4 lg:flex">
           <Link to={`/assignmentDetails/${_id}`}>
-            <button className="flex items-center px-4 py-2 text-white transition duration-300 bg-[#4A07DA] rounded-md hover-bg-blue-600">
+            <button className="flex items-center  w-[203px]  lg:w-[200px] px-4 py-2 text-white transition duration-300 bg-[#4A07DA] rounded-md hover-bg-blue-600">
               <FontAwesomeIcon icon={faEye} className="w-5 h-5 mr-2" />
               View Assignment
             </button>
@@ -129,7 +129,11 @@ function AssignmentCard({ assignment }) {
             data-tip={tooltipContent}
             to={`/updateassignment/${_id}`}
           >
-            <button disabled={!isCurrentUser} style={updateButtonStyle}>
+            <button
+              disabled={!isCurrentUser}
+              className=" w-[203px] lg:w-[250px]"
+              style={updateButtonStyle}
+            >
               <FontAwesomeIcon icon={faEdit} className="w-5 h-5 mr-2" />
               Update Assignment
             </button>
@@ -139,6 +143,7 @@ function AssignmentCard({ assignment }) {
               onClick={() => handleDelete(_id)}
               disabled={!isCurrentUser}
               style={deleteButtonStyle}
+              className="w-[203px] lg:w-[200px]"
             >
               <FontAwesomeIcon icon={faTrash} className="w-5 h-5 mr-2" />
               Delete Assignment
