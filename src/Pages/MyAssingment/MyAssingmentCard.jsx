@@ -1,12 +1,12 @@
 function MyAssingmentCard({ assignment }) {
   const { title, marks, feedback, obtainmarks, thumbnail, status } = assignment;
   const statusColor = {
-    color: status === "completed" ? "green" : "yellow",
+    color: status === "completed" ? "green" : "black",
   };
 
   return (
     <div>
-      <div className="grid grid-cols-[max-content] lg:flex mb-4 bg-gray-400 border border-gray-200 rounded-lg shadow hover-bg-gray-100 dark-border-gray-700 dark-bg-gray-800 dark-hover-bg-gray-700">
+      <div className="grid grid-cols-[max-content] lg:flex mb-4 border border-gray-200 rounded-lg shadow hover-bg-gray-100 dark-border-gray-700 dark-bg-gray-800 dark-hover-bg-gray-700">
         <img
           className="object-cover w-1/4 lg:h-96 md:h-auto"
           src={thumbnail}

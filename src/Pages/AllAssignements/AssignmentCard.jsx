@@ -97,7 +97,7 @@ function AssignmentCard({ assignment }) {
   return (
     <div className="grid grid-cols-[max-content] mb-4 bg-white border border-gray-200 rounded-lg shadow lg:flex hover-bg-gray-100 dark-border-gray-700 dark-bg-gray-800 dark-hover-bg-gray-700">
       <img
-        className="object-cover w-1/4 lg:h-96 md:h-auto"
+        className="object-cover w-1/4 lg:h-96 md:h-auto lg:mr-0 mr-[125px] lg:px-0 px-[10px]"
         src={thumbnail}
         alt={title}
       />
