@@ -1,17 +1,51 @@
-import React from "react";
+import React, { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock, faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import MarkAssignmentModal from "./MarkAssignmentModal";
+import Swal from "sweetalert2";
+import axiosInstance from "../../AxiosAPI/axiosInstance";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 function SubmittedAssignmentsCard({ submittedAssignments }) {
-  const { title, marks, thumbnail, status, examineeName } =
+  const { title, marks, thumbnail, status, examineeName, _id } =
     submittedAssignments;
+  const queryClient = useQueryClient();
+  const modalRef = useRef(null);
 
-  const handleGiveMark = () => {
-    // Handle giving a mark here
+  const { mutateAsync } = useMutation({
+    mutationFn: async (postData) => {
+      const result = await axiosInstance.put(
+        `/api/user/marked-assignments/${_id}`,
+        postData
+      );
+      console.log(result.data);
+      if (result.data.modifiedCount) {
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: "Assignment has been updated successfully.",
+        });
+        // navigate("/assignments");
+      }
+      return result.data;
+    },
+    mutationKey: ["Submitted-assignments"],
+    onSuccess: queryClient.invalidateQueries("Submitted-assignments"),
+  });
+  const handleGiveMark = async (assignmentInfo) => {
+    console.log(assignmentInfo);
+    try {
+      await mutateAsync(assignmentInfo);
+    } catch (err) {
+      console.log(err);
+    }
+    modalRef.current.close();
+    console.log("Assignment marked:", assignmentInfo);
   };
+  // Handle giving a mark here
+  // Make sure to handle the mutation and marking the assignment here
 
+  console.log(_id);
   return (
     <div className="bg-white rounded-lg shadow-lg w-96">
       <figure>
@@ -32,14 +66,16 @@ function SubmittedAssignmentsCard({ submittedAssignments }) {
         <p className="text-lg">Examinee: {examineeName}</p>
         <div className="flex justify-end mt-4">
           <button
-            onClick={() => document.getElementById("my_modal_5").showModal()}
-            className="text-white bg-blue-500 border-none outline-none btn btn-secondary hover:bg-blue-600"
+            onClick={() =>
+              document.getElementById(`my_modal_${_id}`).showModal()
+            }
+            className="text-white bg-blue-500 border-none outline-none btn btn-secondary hover-bg-blue-600"
           >
             <FontAwesomeIcon icon={faCheck} className="mr-2" />
             Give Mark
           </button>
-          {/* Open the modal using document.getElementById('ID').showModal() method */}
           <MarkAssignmentModal
+            handleGiveMark={handleGiveMark}
             viewAssignment={submittedAssignments}
           ></MarkAssignmentModal>
         </div>
