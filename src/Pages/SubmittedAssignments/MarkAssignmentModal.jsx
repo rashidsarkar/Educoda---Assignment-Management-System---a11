@@ -25,7 +25,7 @@ const MarkAssignmentModal = ({ viewAssignment, handleGiveMark }) => {
     const feedback = form.get("feedback");
 
     const assignmentInfo = {
-      marks: +getMarks,
+      obtainmarks: +getMarks,
       feedback,
       status: "completed",
     };
