@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate from the a
 import useAuthProvider from "../FireBase/useAuthProvider";
 
 const axiosInstance = axios.create({
-  // baseURL: "https://educoda-server.vercel.app", // Your API base URL
-  baseURL: "http://localhost:5000", //> Your API base URL
+  baseURL: "https://educoda-server.vercel.app", // Your API base URL
+  // baseURL: "http://localhost:5000", //> Your API base URL
   withCredentials: true,
 });
 
@@ -22,11 +22,11 @@ function useAxiosInstance() {
         console.log("error track ", err.response);
         if (err.response.status === 401 || err.response.status === 403) {
           console.log("Log Out The User");
-          logOut()
-            .then(() => {
-              navigate("/login");
-            })
-            .catch((error) => console.log(error));
+          // logOut()
+          //   .then(() => {
+          //     navigate("/login");
+          //   })
+          //   .catch((error) => console.log(error));
         }
       }
     );
