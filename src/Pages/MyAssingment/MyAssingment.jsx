@@ -62,13 +62,37 @@ function MyAssingment() {
         </ul>
       </div>
       <div>
-        {myAssignments.length > 0 ? (
-          myAssignments.map((assignment) => (
-            <MyAssingmentCard assignment={assignment} key={assignment._id} />
-          ))
-        ) : (
-          <p>No assignments available.</p>
-        )}
+        <div className="overflow-x-auto">
+          <table className="table">
+            {/* head */}
+            <thead>
+              <tr className="text-2xl capitalize">
+                <th>title & thumbnail</th>
+                <th>assignment marks</th>
+                <th>assignment status</th>
+                <th>your obtain marks</th>
+                <th>feedback</th>
+              </tr>
+            </thead>
+            <tbody className="capitalize">
+              {/* ro
+            
+            
+            w 1 */}
+
+              {myAssignments.length > 0 ? (
+                myAssignments.map((assignment) => (
+                  <MyAssingmentCard
+                    assignment={assignment}
+                    key={assignment._id}
+                  />
+                ))
+              ) : (
+                <p>No assignments available.</p>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
