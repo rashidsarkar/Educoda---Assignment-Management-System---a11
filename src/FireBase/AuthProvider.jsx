@@ -12,7 +12,7 @@ import { createContext, useEffect, useState } from "react";
 import app from "./firebaseConfig ";
 import axiosInstance from "../AxiosAPI/axiosInstance";
 import useAxiosInstance from "../AxiosAPI/useAxiosInstance";
-
+import Cookies from "js-cookie";
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
@@ -55,9 +55,10 @@ function AuthProvider({ children }) {
             console.log(res.data);
           });
       } else {
-        axiosInstance
-          .post("/api/user/logout", looggedEmail)
-          .then((res) => console.log(res.data));
+        axiosInstance.post("/api/user/logout", looggedEmail).then((res) => {
+          console.log(res.data);
+          Cookies.remove("token");
+        });
       }
     });
 
