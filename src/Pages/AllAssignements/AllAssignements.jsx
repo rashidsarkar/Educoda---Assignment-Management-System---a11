@@ -9,7 +9,8 @@ import { id } from "date-fns/locale";
 function AllAssignments() {
   const [selectedDifficulty, setSelectedDifficulty] = useState("All"); // Initialize with "all"
   const [page, setPage] = useState(1);
-  const limit = 2;
+  const [limit, setLimit] = useState(3);
+  // const limit = 5;
   // console.log(page);
 
   const difficultyOptions = ["All", "Easy", "Medium", "Hard"];
@@ -37,7 +38,7 @@ function AllAssignments() {
     refetch, // Get the refetch function
   } = useQuery({
     queryFn: getData, // Call the function
-    queryKey: ["all-assignments", selectedDifficulty, page], // Include selectedDifficulty in the query key
+    queryKey: ["all-assignments", selectedDifficulty, limit, page], // Include selectedDifficulty in the query key
   });
   // console.log(allAssignments);
   const handleDifficultyChange = (newDifficulty) => {
@@ -107,8 +108,8 @@ function AllAssignments() {
         )}
       </div>
       {totalPage > 0 && (
-        <div className="flex justify-center">
-          <div className="border-2 join border-primary">
+        <div className="justify-center lg:flex ">
+          <div className="border-2  lg:border-r-0 rounded lg:rounded-tr-[0] lg:rounded-br-[0] join border-primary">
             <button
               onClick={handlePrevious}
               className="btn join-item btn-ghost"
@@ -137,6 +138,22 @@ function AllAssignments() {
             <button onClick={handleNext} className="btn join-item btn-ghost">
               {">>"}
             </button>
+          </div>
+          <div className="border-2 lg:rounded-tl-[0] lg:rounded-bl-[0] join border-primary px-3">
+            <li className="flex items-center justify-between">
+              <p className="nav-link active">Items per Page:</p>
+              <select
+                id="itemsPerPage"
+                className="py-1 border rounded-md lg:px-2 lg:w-auto w-[50px]"
+                onChange={(event) => setLimit(event.target.value)}
+                value={limit}
+              >
+                <option value="3">3</option>
+                <option value="6">6</option>
+                <option value="9">9</option>
+                {/* Add more options as needed */}
+              </select>
+            </li>
           </div>
         </div>
       )}

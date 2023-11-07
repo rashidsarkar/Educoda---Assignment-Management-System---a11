@@ -1,96 +1,97 @@
-function Pagination() {
+function Pagination({ page, totalPage, setPage, allAssignments }) {
+  const handlePrevious = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (page < totalPage) {
+      setPage(page + 1);
+    }
+  };
+
   return (
     <div>
-      <div class="flex flex-col lg:flex-row justify-between">
-        {" "}
-        <div class="flex flex-col lg:flex-row items-center space-x-2 text-xs">
-          {" "}
-          <button class="py-2 px-4 bg-white text-gray-600 font-medium rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50 inline-flex items-center">
-            {" "}
-            10 items{" "}
+      <div className="flex flex-col justify-between lg:flex-row">
+        <div className="flex flex-col items-center space-x-2 text-xs lg:flex-row">
+          <button className="inline-flex items-center px-4 py-2 font-medium text-gray-600 bg-white rounded hover:bg-gray-100 active:bg-gray-200 disabled:opacity-50">
+            10 items
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 ml-2"
+              className="w-5 h-5 ml-2"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
-              {" "}
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                clip-rule="evenodd"
-              />{" "}
-            </svg>{" "}
-          </button>{" "}
-          <p class="text-gray-500 mt-4 lg:mt-0">
-            Showing 11 to 20 of 95 entires
-          </p>{" "}
-        </div>{" "}
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+          <p className="mt-4 text-gray-500 lg:mt-0">
+            Showing {(page - 1) * 10 + 1} to{" "}
+            {Math.min(page * 10, allAssignments.count)} of{" "}
+            {allAssignments.count} entries
+          </p>
+        </div>
         <nav
           aria-label="Pagination"
-          class="flex justify-center items-center text-gray-600 mt-8 lg:mt-0"
+          className="flex items-center justify-center mt-8 text-gray-600 lg:mt-0"
         >
-          {" "}
-          <a href="#" class="p-2 mr-4 rounded hover:bg-gray-100">
-            {" "}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {" "}
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 19l-7-7 7-7"
-              />{" "}
-            </svg>{" "}
-          </a>{" "}
-          <a href="#" class="px-4 py-2 rounded hover:bg-gray-100">
-            {" "}
-            1{" "}
-          </a>{" "}
-          <a
-            href="#"
-            class="px-4 py-2 rounded bg-gray-200 text-gray-900 font-medium hover:bg-gray-100"
+          <button
+            onClick={handlePrevious}
+            className="p-2 mr-4 rounded hover:bg-gray-100"
           >
-            {" "}
-            2{" "}
-          </a>{" "}
-          <a href="#" class="px-4 py-2 rounded hover:bg-gray-100">
-            {" "}
-            3{" "}
-          </a>{" "}
-          <a href="#" class="px-4 py-2 rounded hover:bg-gray-100">
-            {" "}
-            ...{" "}
-          </a>{" "}
-          <a href="#" class="px-4 py-2 rounded hover:bg-gray-100">
-            {" "}
-            9{" "}
-          </a>{" "}
-          <a href="#" class="p-2 ml-4 rounded hover:bg-gray-100">
-            {" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
+              className="w-6 h-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              {" "}
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          {Array.from({ length: totalPage }, (_, idx) => (
+            <button
+              key={idx + 1}
+              onClick={() => setPage(idx + 1)}
+              className={`${
+                idx + 1 === page
+                  ? "px-4 py-2 rounded bg-gray-200 text-gray-900 font-medium hover:bg-gray-100"
+                  : "px-4 py-2 rounded hover:bg-gray-100"
+              }`}
+            >
+              {idx + 1}
+            </button>
+          ))}
+          <button
+            onClick={handleNext}
+            className="p-2 ml-4 rounded hover-bg-gray-100"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M9 5l7 7-7 7"
-              />{" "}
-            </svg>{" "}
-          </a>{" "}
-        </nav>{" "}
+              />
+            </svg>
+          </button>
+        </nav>
       </div>
     </div>
   );
