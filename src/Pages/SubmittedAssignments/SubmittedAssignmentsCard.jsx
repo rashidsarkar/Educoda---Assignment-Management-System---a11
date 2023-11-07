@@ -50,9 +50,13 @@ function SubmittedAssignmentsCard({ submittedAssignments }) {
 
   // console.log(_id);
   return (
-    <div className="bg-white rounded-lg shadow-lg lg:w-96">
+    <div className="bg-gray-200  rounded-lg shadow-lg lg:w-96">
       <figure>
-        <img src={thumbnail} alt={title} className="object-cover w-full h-40" />
+        <img
+          src={thumbnail}
+          alt={title}
+          className="object-cover rounded w-full h-40"
+        />
       </figure>
       <div className="p-4">
         <h2 className="text-3xl italic font-bold text-gray-600">{title}</h2>

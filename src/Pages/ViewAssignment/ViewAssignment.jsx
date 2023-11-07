@@ -1,17 +1,28 @@
 import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 // import axiosInstance from "../../AxiosAPI/axiosInstance";
 import CustomLoading from "../../Components/CustomLoading";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import "aos/dist/aos.css";
 import AOS from "aos";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle, faEdit } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheckCircle,
+  faEdit,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import TakeAssignmentModal from "./TakeAssignmentModal";
 import useAxiosInstance from "../../AxiosAPI/useAxiosInstance";
+import useAuthProvider from "../../FireBase/useAuthProvider";
+import Swal from "sweetalert2";
+
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 function ViewAssignment() {
   const axiosInstance = useAxiosInstance();
+  const queryClient = useQueryClient();
+  const { user } = useAuthProvider();
+  const navigate = useNavigate();
 
   const { idx } = useParams();
 
@@ -33,14 +44,6 @@ function ViewAssignment() {
     AOS.init();
   }, []);
 
-  if (error) {
-    return error.message;
-  }
-
-  if (isLoading) {
-    return <CustomLoading></CustomLoading>;
-  }
-
   const {
     title,
     difficulty,
@@ -51,6 +54,59 @@ function ViewAssignment() {
     email,
     _id,
   } = viewAssignment || {};
+  const isCurrentUser = email === user?.email;
+
+  const deleteButtonStyle = {
+    backgroundColor: isCurrentUser ? "red" : "gray",
+  };
+  const { mutateAsync } = useMutation({
+    mutationFn: async (id) => {
+      const res = await axiosInstance.delete(
+        `/api/delete-my-assignments/${id}`
+      );
+      return res.data;
+    },
+    // mutationKey: ["bookingData"],
+
+    onSuccess: () => {
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Assignment has been deleted successfully.",
+      });
+      // QueryClient.invalidateQueries(["create-assignments"]);
+      queryClient.invalidateQueries("create-assignments");
+    },
+  });
+  const handleDelete = (itemId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Trigger the mutation to delete the assignment
+        navigate("/assignments");
+        mutateAsync(itemId);
+      }
+    });
+  };
+  let tooltipContent = "You didn't create this.";
+  if (isCurrentUser) {
+    tooltipContent = null; // No content if the user is the creator
+  }
+
+  if (error) {
+    return error.message;
+  }
+
+  if (isLoading) {
+    return <CustomLoading></CustomLoading>;
+  }
 
   return (
     <div className="min-h-screen pt-[150px] bg-gray-100">
@@ -68,7 +124,7 @@ function ViewAssignment() {
               <p className="mt-4 text-gray-700">{description}</p>
               <p className="mt-4 text-gray-700">{dueDate}</p>
             </div>
-            <div className="mt-8 space-x-2">
+            <div className="mt-8 lg:space-x-2 lg:block flex flex-wrap space-y-3">
               <Link
                 onClick={() =>
                   document.getElementById("my_modal_5").showModal()
@@ -80,6 +136,17 @@ function ViewAssignment() {
                   className="w-5 h-5 mr-2"
                 />
                 Take assignment
+              </Link>
+              <Link className="tooltip" data-tip={tooltipContent}>
+                <button
+                  onClick={() => handleDelete(_id)}
+                  disabled={!isCurrentUser}
+                  style={deleteButtonStyle}
+                  className="btn btn-error"
+                >
+                  <FontAwesomeIcon icon={faTrash} className="w-5 h-5 mr-2" />
+                  Delete Assignment
+                </button>
               </Link>
               {/* Open the modal using document.getElementById('ID').showModal() method */}
 

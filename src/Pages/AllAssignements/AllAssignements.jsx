@@ -102,7 +102,7 @@ function AllAssignments() {
           </li>
         </ul>
       </div>
-      <div>
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 ">
         {allAssignments.result.length > 0 ? (
           allAssignments.result.map((assignment) => (
             <AssignmentCard assignment={assignment} key={assignment._id} />

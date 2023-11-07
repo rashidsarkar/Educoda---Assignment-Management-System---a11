@@ -38,7 +38,18 @@ function SubmittedAssignments() {
   }
   return (
     <div className="min-h-screen py-[150px]">
-      <div className="grid grid-cols-1 lg:grid-cols-3">
+      <div className="assignment-nav-wrap">
+        <ul
+          className="flex justify-between nav nav-pills"
+          id="pills-tab-1"
+          role="tablist"
+        >
+          <li className="nav-item">
+            <button className="nav-link active">Submitted Assignments</button>
+          </li>
+        </ul>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {submittedAssignments.map((item) => (
           <SubmittedAssignmentsCard
             submittedAssignments={item}

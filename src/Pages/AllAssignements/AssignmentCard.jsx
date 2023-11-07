@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
@@ -18,8 +18,10 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import useAxiosInstance from "../../AxiosAPI/useAxiosInstance";
+import "./ALLAssingment.css";
 
 function AssignmentCard({ assignment }) {
+  const navigate = useNavigate();
   const axiosInstance = useAxiosInstance();
 
   const queryClient = useQueryClient();
@@ -38,15 +40,12 @@ function AssignmentCard({ assignment }) {
   const isCurrentUser = email === user?.email;
 
   const updateButtonStyle = {
-    flex: "1",
-    display: "flex",
-    alignItems: "center",
-    padding: "8px 16px",
-    color: "white",
-    transition: "background 0.3s",
-    backgroundColor: isCurrentUser ? "green" : "gray",
-    borderRadius: "4px",
+    backgroundColor: isCurrentUser ? "#3ABFF8" : "gray",
   };
+  const UpdateButtonClass = isCurrentUser
+    ? "btn btn-active  "
+    : "btn btn-disabled";
+
   const deleteButtonStyle = {
     flex: "1",
     display: "flex",
@@ -93,65 +92,61 @@ function AssignmentCard({ assignment }) {
       }
     });
   };
-  let tooltipContent = "You are not the creator of this assignment";
+  useEffect(() => {
+    VanillaTilt.init(document.querySelectorAll(".carda"), {
+      glare: true,
+      reverse: true,
+      "max-glare": 0.5,
+    });
+  }, []);
+  const updateBTN = () => {
+    console.log("click ok");
+    navigate(`/updateassignment/${_id}`);
+  };
+  const viewBTN = () => {
+    console.log("click ok");
+    navigate(`/assignmentDetails/${_id}`);
+  };
+
+  let tooltipContent = "You didn't create this.";
   if (isCurrentUser) {
     tooltipContent = null; // No content if the user is the creator
   }
+  let cardStyle = {
+    backgroundImage: `url(${thumbnail})`,
+  };
+
   return (
-    <div className="grid grid-cols-[max-content] mb-4 bg-white border border-gray-200 rounded-lg shadow lg:flex hover-bg-gray-100 dark-border-gray-700 dark-bg-gray-800 dark-hover-bg-gray-700">
-      <img
-        className="object-cover w-1/4 lg:h-96 md:h-auto lg:mr-0 mr-[125px] lg:px-0 px-[10px]"
-        src={thumbnail}
-        alt={title}
-      />
-      <div className="inline-block p-4 w-[200px] lg:w-3/4">
-        <h2 className="mb-2 text-3xl italic font-bold text-gray-900 dark-text-white">
-          {title}
-        </h2>
-        <p className="mb-3 text-sm text-gray-700 dark-text-gray-400">
-          <span className="font-bold">Difficulty Level:</span> {difficulty}
-        </p>
-        <p className="mb-3 text-sm text-gray-700 dark-text-gray-400">
-          <span className="font-bold">Marks:</span> {marks}
-        </p>
-        <p className="mb-3 text-sm text-gray-700 dark-text-gray-400">
-          <span className="font-bold">Due Date:</span> {dueDate}
-        </p>
-        <p className="text-sm text-gray-700 dark-text-gray-400">
-          <span className="font-bold">Description:</span> {description}
-        </p>
-        <div className="mt-4 space-y-2 lg:space-y-0 lg:space-x-4 lg:flex">
-          <Link to={`/assignmentDetails/${_id}`}>
-            <button className="flex items-center  w-[203px]  lg:w-[200px] px-4 py-2 text-white transition duration-300 bg-[#4A07DA] rounded-md hover-bg-blue-600">
-              <FontAwesomeIcon icon={faEye} className="w-5 h-5 mr-2" />
+    <div className="mx-4 md:mx-0 cards-container">
+      <div className="m-2 mx-auto carda lg:m-7 md:m-3 md:pb-0 pb-5">
+        <div style={cardStyle} className="card-image quiz-image"></div>
+        <div className="card-text">
+          <span className="date uppercase">{difficulty}</span>
+          <h2>{title}</h2>
+          <p>Mark:{marks}</p>
+        </div>
+
+        <div className="">
+          <div className="space-x-2 lg:mb-3 flex flex-wrap justify-center">
+            <Link
+              className="tooltip "
+              data-tip={tooltipContent}
+              // to={`/updateassignment/${_id}`}
+            >
+              <button
+                onClick={updateBTN}
+                style={updateButtonStyle}
+                disabled={!isCurrentUser}
+                className={UpdateButtonClass}
+              >
+                Update Assignment
+              </button>
+            </Link>
+
+            <button onClick={viewBTN} className="btn btn-active btn-success">
               View Assignment
             </button>
-          </Link>
-          <Link
-            className="tooltip"
-            data-tip={tooltipContent}
-            to={`/updateassignment/${_id}`}
-          >
-            <button
-              disabled={!isCurrentUser}
-              className=" w-[203px] lg:w-[250px]"
-              style={updateButtonStyle}
-            >
-              <FontAwesomeIcon icon={faEdit} className="w-5 h-5 mr-2" />
-              Update Assignment
-            </button>
-          </Link>
-          <Link className="tooltip" data-tip={tooltipContent}>
-            <button
-              onClick={() => handleDelete(_id)}
-              disabled={!isCurrentUser}
-              style={deleteButtonStyle}
-              className="w-[203px] lg:w-[200px]"
-            >
-              <FontAwesomeIcon icon={faTrash} className="w-5 h-5 mr-2" />
-              Delete Assignment
-            </button>
-          </Link>
+          </div>
         </div>
       </div>
     </div>
