@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { motion } from "framer-motion"; // Import motion from Framer Motion
 import ButtonCustom from "../../Components/ButtonCustom";
 import useAuthProvider from "../../FireBase/useAuthProvider";
 import { useMutation } from "@tanstack/react-query";
-// import axiosInstance from "../../AxiosAPI/axiosInstance";
 import Swal from "sweetalert2";
 import "./assignmentCreate.css";
 import useAxiosInstance from "../../AxiosAPI/useAxiosInstance";
@@ -38,6 +38,22 @@ function AssignmentCreate() {
     },
   });
 
+  // Variants for animations
+  const formVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+  };
+
+  const inputVariants = {
+    hidden: { x: -20, opacity: 0 },
+    visible: { x: 0, opacity: 1, transition: { delay: 0.2 } },
+  };
+
+  const buttonVariants = {
+    hidden: { x: 20, opacity: 0 },
+    visible: { x: 0, opacity: 1, transition: { delay: 0.4 } },
+  };
+
   const handleSubAssignment = async (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
@@ -63,62 +79,76 @@ function AssignmentCreate() {
   };
 
   return (
-    <div className="">
-      <div
-        className="hero min-h-screen"
-        style={{
-          backgroundImage:
-            "url(https://i.ibb.co/bK4BWtJ/karthikeya-gs-HGn2-OIV6-Cgo-unsplash.jpg)",
-        }}
-      >
-        <div className="hero-overlay bg-opacity-60"></div>
-        <div className="hero-content text-center text-neutral-content  pt-[150px]">
-          <div className="max-w-xl">
-            <h1 className="mb-5 text-5xl font-bold">Our Mission and Vision</h1>
-            <p className="mb-5 font-semibold lg:text-xl">
-              At AssignmentHub, our mission is to connect students, educators,
-              and professionals through a diverse selection of assignments. We
-              envision a world where learning is accessible and engaging for
-              all. Join us in this educational adventure.
-            </p>
-            <button className="btn btn-primary">Get Started</button>
+    <>
+      <div className="">
+        <div
+          className="hero min-h-screen"
+          style={{
+            backgroundImage:
+              "url(https://i.ibb.co/bK4BWtJ/karthikeya-gs-HGn2-OIV6-Cgo-unsplash.jpg)",
+          }}
+        >
+          <div className="hero-overlay bg-opacity-60"></div>
+          <div className="hero-content text-center text-neutral-content  pt-[150px]">
+            <div className="max-w-xl">
+              <h1 className="mb-5 text-5xl font-bold">
+                Our Mission and Vision
+              </h1>
+              <p className="mb-5 font-semibold lg:text-xl">
+                At AssignmentHub, our mission is to connect students, educators,
+                and professionals through a diverse selection of assignments. We
+                envision a world where learning is accessible and engaging for
+                all. Join us in this educational adventure.
+              </p>
+              <button className="btn btn-primary">Get Started</button>
+            </div>
           </div>
         </div>
+        <div className="assignment-nav-wrap">
+          <ul className="nav nav-pills" id="pills-tab-1" role="tablist">
+            <li className="nav-item" role="presentation">
+              <button
+                className="nav-link active"
+                id="pills-five-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-five"
+                role="tab"
+                aria-controls="pills-five"
+                aria-selected="true"
+              >
+                Create Assignments
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div className="assignment-nav-wrap">
-        <ul className="nav nav-pills" id="pills-tab-1" role="tablist">
-          <li className="nav-item" role="presentation">
-            <button
-              className="nav-link active"
-              id="pills-five-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#pills-five"
-              role="tab"
-              aria-controls="pills-five"
-              aria-selected="true"
-            >
-              Create Assignments
-            </button>
-          </li>
-        </ul>
-      </div>
-      <div className="p-8 bg-gray-200 assignment-form-wrap">
+      <motion.div
+        className="assignment-form-wrap"
+        variants={formVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <form onSubmit={handleSubAssignment}>
           <div className="grid-cols-1 gap-4 md:grid md:grid-cols-2 lg:grid-cols-3">
             <div className="mb-4">
-              <label htmlFor="title">Title:</label>
-              <input
+              <motion.label htmlFor="title" variants={inputVariants}>
+                Title:
+              </motion.label>
+              <motion.input
                 type="text"
                 id="title"
                 required
                 name="title"
                 className="block w-full p-2 mt-1 border border-gray-300 rounded"
                 placeholder="Title"
+                variants={inputVariants}
               />
             </div>
 
             <div className="mb-4">
-              <label htmlFor="difficulty">Difficulty Level:</label>
+              <motion.label htmlFor="difficulty" variants={inputVariants}>
+                Difficulty Level:
+              </motion.label>
               <select
                 id="difficulty"
                 name="difficulty"
@@ -131,45 +161,58 @@ function AssignmentCreate() {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="marks">Marks:</label>
-              <input
+              <motion.label htmlFor="marks" variants={inputVariants}>
+                Marks:
+              </motion.label>
+              <motion.input
                 type="number"
                 id="marks"
                 name="marks"
                 required
                 className="block w-full p-2 mt-1 border border-gray-300 rounded"
                 placeholder="Marks"
+                variants={inputVariants}
               />
             </div>
 
             <div className="mb-4">
-              <label htmlFor="thumbnail">Thumbnail Image URL:</label>
-              <input
+              <motion.label htmlFor="thumbnail" variants={inputVariants}>
+                Thumbnail Image URL:
+              </motion.label>
+              <motion.input
                 id="thumbnail"
                 name="thumbnail"
                 type="url"
                 required
                 className="block w-full p-2 mt-1 border border-gray-300 rounded"
                 placeholder="Thumbnail Image URL"
+                variants={inputVariants}
               />
             </div>
 
             <div className="mb-4">
-              <label htmlFor="description">Description:</label>
-              <input
+              <motion.label htmlFor="description" variants={inputVariants}>
+                Description:
+              </motion.label>
+              <motion.input
                 type="text"
                 id="description"
                 required
                 name="description"
                 className="block w-full p-2 mt-1 border border-gray-300 rounded"
                 placeholder="Description"
+                variants={inputVariants}
               />
             </div>
 
             <div className="mb-4">
-              <label className="block" htmlFor="datepicker">
+              <motion.label
+                className="block"
+                htmlFor="datepicker"
+                variants={inputVariants}
+              >
                 Due Date:
-              </label>
+              </motion.label>
               <DatePicker
                 id="datepicker"
                 name="dueDate"
@@ -179,21 +222,25 @@ function AssignmentCreate() {
                 onChange={handleDateChange}
                 className="block p-2 mt-1 border w-[-webkit-fill-available] border-gray-300 rounded lg:w-full"
                 placeholderText="Due Date"
+                variants={inputVariants}
               />
             </div>
 
-            <div className="flex items-center justify-start col-span-2">
-              <button
+            <motion.div
+              className="flex items-center justify-start col-span-2"
+              variants={buttonVariants}
+            >
+              <motion.button
                 type="submit"
                 className="px-4 py-2 text-white bg-blue-500 rounded"
               >
                 Submit
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
           </div>
         </form>
-      </div>
-    </div>
+      </motion.div>
+    </>
   );
 }
 
