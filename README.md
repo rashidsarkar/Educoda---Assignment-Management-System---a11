@@ -77,31 +77,4 @@ Our website is built with the following technologies:
 
   - Firebase Authentication: Secure user authentication system for account management.
 
-- **Deployment:**
-  - [Specify where your project is deployed, e.g., Heroku, Netlify, Vercel, etc.]
-
-## Usage
-
-To get started, visit our website at [Assignment Management System](https://your-website-link.com). Create an account, browse assignments, submit your work, and stay organized with ease.
-
-## Getting Started
-
-If you want to set up and run this project locally for development, follow these steps:
-
-1. Clone this repository.
-2. Install the necessary dependencies using [npm](https://www.npmjs.com/).
-3. Run the development server using `npm start`.
-
-## Contributing
-
-We welcome contributions to enhance our platform. Feel free to fork this repository, make improvements, and submit pull requests.
-
-## License
-
-This project is released under the [Specify the license here, e.g., MIT License].
-
-## Contact
-
-For questions or feedback, you can reach us at [your contact information or social profiles].
-
 Start exploring and managing your assignments efficiently with Assignment Management System!
