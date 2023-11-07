@@ -112,52 +112,54 @@ function AllAssignments() {
         )}
       </div>
       {totalPage > 0 && (
-        <div className="justify-center lg:flex ">
-          <div className="border-2  lg:border-r-0 rounded lg:rounded-tr-[0] lg:rounded-br-[0] join border-primary">
-            <button
-              onClick={handlePrevious}
-              className="btn join-item btn-ghost"
-            >
-              {"<<"}
-            </button>
-            {Array(totalPage)
-              .fill(0)
-              .map((item, idx) => {
-                const pageNum = idx + 1;
-                return (
-                  <button
-                    key={idx + 1}
-                    onClick={() => setPage(pageNum)}
-                    className={`${
-                      pageNum === page
-                        ? "btn join-item btn-primary"
-                        : "btn join-item btn-ghost"
-                    } `}
-                  >
-                    {` ${pageNum} `}
-                  </button>
-                );
-              })}
-
-            <button onClick={handleNext} className="btn join-item btn-ghost">
-              {">>"}
-            </button>
-          </div>
-          <div className="border-2 lg:rounded-tl-[0] lg:rounded-bl-[0] join border-primary px-3">
-            <li className="flex items-center justify-between">
-              <p className="nav-link active">Items per Page:</p>
-              <select
-                id="itemsPerPage"
-                className="py-1 border rounded-md lg:px-2 lg:w-auto w-[50px]"
-                onChange={(event) => setLimit(event.target.value)}
-                value={limit}
+        <div className="justify-center flex   ">
+          <div className="join join-vertical lg:join-horizontal">
+            <div className="border-2  rounded-none lg:border-r-0  lg:rounded-tr-[0] lg:rounded-br-[0] join border-primary">
+              <button
+                onClick={handlePrevious}
+                className="btn join-item btn-ghost"
               >
-                <option value="3">3</option>
-                <option value="6">6</option>
-                <option value="9">9</option>
-                {/* Add more options as needed */}
-              </select>
-            </li>
+                {"<<"}
+              </button>
+              {Array(totalPage)
+                .fill(0)
+                .map((item, idx) => {
+                  const pageNum = idx + 1;
+                  return (
+                    <button
+                      key={idx + 1}
+                      onClick={() => setPage(pageNum)}
+                      className={`${
+                        pageNum === page
+                          ? "btn join-item btn-primary"
+                          : "btn join-item btn-ghost"
+                      } `}
+                    >
+                      {` ${pageNum} `}
+                    </button>
+                  );
+                })}
+
+              <button onClick={handleNext} className="btn join-item btn-ghost">
+                {">>"}
+              </button>
+            </div>
+            <div className="border-2 rounded-none rounded-tl-none rounded-bl-none lg:rounded-tl-[0] lg:rounded-bl-[0] join border-primary px-3">
+              <li className="flex items-center justify-between">
+                <p className="nav-link active">Items per Page:</p>
+                <select
+                  id="itemsPerPage"
+                  className="py-1 border rounded-md lg:px-2 lg:w-auto w-[50px]"
+                  onChange={(event) => setLimit(event.target.value)}
+                  value={limit}
+                >
+                  <option value="3">3</option>
+                  <option value="6">6</option>
+                  <option value="9">9</option>
+                  {/* Add more options as needed */}
+                </select>
+              </li>
+            </div>
           </div>
         </div>
       )}

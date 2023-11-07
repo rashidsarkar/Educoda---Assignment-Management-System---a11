@@ -127,7 +127,8 @@ function AssignmentCard({ assignment }) {
         </div>
 
         <div className="">
-          <div className="space-x-2 lg:mb-3 flex flex-wrap justify-center">
+          {/* <div className="space-x-2 lg:mb-3 flex flex-wrap justify-center"> */}
+          <div className="join join-vertical lg:join-horizontal lg:space-x-2">
             <Link
               className="tooltip "
               data-tip={tooltipContent}
@@ -147,6 +148,7 @@ function AssignmentCard({ assignment }) {
               View Assignment
             </button>
           </div>
+          {/* </div> */}
         </div>
       </div>
     </div>

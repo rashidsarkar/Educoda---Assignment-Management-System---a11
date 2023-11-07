@@ -112,10 +112,13 @@ function ViewAssignment() {
     <div className="min-h-screen pt-[150px] bg-gray-100">
       <div className="container mx-auto">
         <div className="flex flex-wrap">
-          <div data-aos="zoom-in" className="w-full md:w-1/2">
+          <div
+            data-aos="zoom-in"
+            className="w-full md:flex md:justify-center md:items-center md:w-1/2"
+          >
             <img src={thumbnail} alt={title} className="w-full rounded-lg" />
           </div>
-          <div data-aos="zoom-in" className="w-full p-8 md:w-1/2">
+          <div data-aos="zoom-in" className="w-full p-8  md:w-1/2">
             <h2 className="text-3xl font-semibold">{title}</h2>
             <p className="text-xl font-bold text-green-600">Marks: {marks}</p>
 
