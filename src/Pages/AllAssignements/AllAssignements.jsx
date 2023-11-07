@@ -18,7 +18,7 @@ function AllAssignments() {
   // console.log(page);
 
   const difficultyOptions = ["All", "Easy", "Medium", "Hard"];
-  // https://educoda-server.vercel.app/api/all-assignments?limit=3&page=2
+  // http://localhost:5000/api/all-assignments?limit=3&page=2
 
   const getData = async () => {
     if (selectedDifficulty === "All") {
@@ -52,7 +52,7 @@ function AllAssignments() {
   };
   let totalPage = Math.ceil(allAssignments?.count / limit);
   // console.log(totalPage);
-  // https://educoda-server.vercel.app/api/all-assignments?limit=3&page=2
+  // http://localhost:5000/api/all-assignments?limit=3&page=2
 
   const handlePrevious = () => {
     if (page > 1) {
