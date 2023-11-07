@@ -11,14 +11,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import useAuthProvider from "../../FireBase/useAuthProvider";
 import Swal from "sweetalert2";
-import axiosInstance from "../../AxiosAPI/axiosInstance";
+// import axiosInstance from "../../AxiosAPI/axiosInstance";
 import {
   QueryClient,
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
+import useAxiosInstance from "../../AxiosAPI/useAxiosInstance";
 
 function AssignmentCard({ assignment }) {
+  const axiosInstance = useAxiosInstance();
+
   const queryClient = useQueryClient();
   const { user } = useAuthProvider();
   const {

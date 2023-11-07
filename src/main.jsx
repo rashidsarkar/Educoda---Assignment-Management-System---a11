@@ -9,11 +9,9 @@ import AuthProvider from "./FireBase/AuthProvider.jsx";
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router}></RouterProvider>
-      </QueryClientProvider>
-    </AuthProvider>
-  </React.StrictMode>
+  <AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router}></RouterProvider>
+    </QueryClientProvider>
+  </AuthProvider>
 );

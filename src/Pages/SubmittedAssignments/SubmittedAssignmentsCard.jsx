@@ -3,10 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import MarkAssignmentModal from "./MarkAssignmentModal";
 import Swal from "sweetalert2";
-import axiosInstance from "../../AxiosAPI/axiosInstance";
+// import axiosInstance from "../../AxiosAPI/axiosInstance";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useAxiosInstance from "../../AxiosAPI/useAxiosInstance";
 
 function SubmittedAssignmentsCard({ submittedAssignments }) {
+  const axiosInstance = useAxiosInstance();
+
   const { title, marks, thumbnail, status, examineeName, _id } =
     submittedAssignments;
   const queryClient = useQueryClient();

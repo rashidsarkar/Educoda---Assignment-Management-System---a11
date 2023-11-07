@@ -4,11 +4,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import ButtonCustom from "../../Components/ButtonCustom";
 import useAuthProvider from "../../FireBase/useAuthProvider";
 import { useMutation } from "@tanstack/react-query";
-import axiosInstance from "../../AxiosAPI/axiosInstance";
+// import axiosInstance from "../../AxiosAPI/axiosInstance";
 import Swal from "sweetalert2";
 import "./assignmentCreate.css";
+import useAxiosInstance from "../../AxiosAPI/useAxiosInstance";
 
 function AssignmentCreate() {
+  const axiosInstance = useAxiosInstance();
+
   const { user } = useAuthProvider();
   let email = user.email;
   const [dueDate, setDueDate] = useState(null);

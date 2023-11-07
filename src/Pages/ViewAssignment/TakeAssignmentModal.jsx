@@ -2,11 +2,14 @@ import React, { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useMutation } from "@tanstack/react-query";
-import axiosInstance from "../../AxiosAPI/axiosInstance";
+// import axiosInstance from "../../AxiosAPI/axiosInstance";
 import Swal from "sweetalert2";
 import useAuthProvider from "../../FireBase/useAuthProvider";
+import useAxiosInstance from "../../AxiosAPI/useAxiosInstance";
 
 const TakeAssignmentModal = ({ viewAssignment }) => {
+  const axiosInstance = useAxiosInstance();
+
   const { user } = useAuthProvider();
   const {
     title,

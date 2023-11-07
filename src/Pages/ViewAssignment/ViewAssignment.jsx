@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import axiosInstance from "../../AxiosAPI/axiosInstance";
+// import axiosInstance from "../../AxiosAPI/axiosInstance";
 import CustomLoading from "../../Components/CustomLoading";
 import { useQuery } from "@tanstack/react-query";
 import "aos/dist/aos.css";
@@ -8,8 +8,11 @@ import AOS from "aos";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faEdit } from "@fortawesome/free-solid-svg-icons";
 import TakeAssignmentModal from "./TakeAssignmentModal";
+import useAxiosInstance from "../../AxiosAPI/useAxiosInstance";
 
 function ViewAssignment() {
+  const axiosInstance = useAxiosInstance();
+
   const { idx } = useParams();
 
   const getData = async () => {

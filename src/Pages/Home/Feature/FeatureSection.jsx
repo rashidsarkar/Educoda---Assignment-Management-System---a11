@@ -2,10 +2,13 @@ import React, { useEffect } from "react";
 import VanillaTilt from "vanilla-tilt";
 import "./FeatureSection.css";
 import { useQuery } from "@tanstack/react-query";
-import axiosInstance from "../../../AxiosAPI/axiosInstance";
+// import axiosInstance from "../../../AxiosAPI/axiosInstance";
 import CustomLoading from "../../../Components/CustomLoading";
+import useAxiosInstance from "../../../AxiosAPI/useAxiosInstance";
 
 function FeatureSection({ feature }) {
+  const axiosInstance = useAxiosInstance();
+
   const { date, title, description, image } = feature;
   useEffect(() => {
     VanillaTilt.init(document.querySelectorAll(".carda"), {

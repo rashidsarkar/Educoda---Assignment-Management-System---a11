@@ -11,12 +11,15 @@ import {
 import { createContext, useEffect, useState } from "react";
 import app from "./firebaseConfig ";
 import axiosInstance from "../AxiosAPI/axiosInstance";
+import useAxiosInstance from "../AxiosAPI/useAxiosInstance";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 function AuthProvider({ children }) {
+  // const axiosInstance = useAxiosInstance();
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   //creat email pass sing in
@@ -41,14 +44,20 @@ function AuthProvider({ children }) {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+      const looggedEmail = { user: currentUser?.email };
+
       if (currentUser) {
-        const looggedEmail = { user: currentUser.email };
+        // const looggedEmail = { user: currentUser.email };
         // console.log(currentUser);
         axiosInstance
           .post("/api/auth/access-token", looggedEmail)
           .then((res) => {
             console.log(res.data);
           });
+      } else {
+        axiosInstance
+          .post("/api/user/logout", looggedEmail)
+          .then((res) => console.log(res.data));
       }
     });
 

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import axiosInstance from "../../AxiosAPI/axiosInstance";
+
 import CustomLoading from "../../Components/CustomLoading";
 import AssignmentCard from "./AssignmentCard";
 import Pagination from "./Pagination/Pagination";
 import { id } from "date-fns/locale";
+import axiosInstance from "../../AxiosAPI/axiosInstance";
+import useAxiosInstance from "../../AxiosAPI/useAxiosInstance";
+// import useAxiosInstance from "../../AxiosAPI/axiosInstance";
 
 function AllAssignments() {
+  const axiosInstance = useAxiosInstance();
   const [selectedDifficulty, setSelectedDifficulty] = useState("All"); // Initialize with "all"
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(3);

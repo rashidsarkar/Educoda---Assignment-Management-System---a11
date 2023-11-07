@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import axiosInstance from "../../AxiosAPI/axiosInstance";
+// import axiosInstance from "../../AxiosAPI/axiosInstance";
 import useAuthProvider from "../../FireBase/useAuthProvider";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +12,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import MyAssingmentCard from "./MyAssingmentCard";
 import CustomLoading from "../../Components/CustomLoading";
+import useAxiosInstance from "../../AxiosAPI/useAxiosInstance";
 function MyAssingment() {
+  const axiosInstance = useAxiosInstance();
+
   const queryClient = useQueryClient();
   const { user } = useAuthProvider();
   // console.log(user.email);

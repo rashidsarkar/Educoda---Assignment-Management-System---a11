@@ -5,14 +5,17 @@ import ButtonCustom from "../../Components/ButtonCustom";
 
 import useAuthProvider from "../../FireBase/useAuthProvider";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import axiosInstance from "../../AxiosAPI/axiosInstance";
+// import axiosInstance from "../../AxiosAPI/axiosInstance";
 import swal from "sweetalert";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import { updateCurrentUser } from "firebase/auth";
 import CustomLoading from "../../Components/CustomLoading";
+import useAxiosInstance from "../../AxiosAPI/useAxiosInstance";
 
 function UpdateAssignment() {
+  const axiosInstance = useAxiosInstance();
+
   const { user } = useAuthProvider();
   const { idx } = useParams();
   const navigate = useNavigate();

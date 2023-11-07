@@ -1,10 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import axiosInstance from "../../AxiosAPI/axiosInstance";
+
 import SubmittedAssignmentsCard from "./SubmittedAssignmentsCard";
 import useAuthProvider from "../../FireBase/useAuthProvider";
 import CustomLoading from "../../Components/CustomLoading";
+import useAxiosInstance from "../../AxiosAPI/useAxiosInstance";
+// import axiosInstance from "../../AxiosAPI/axiosInstance";
 
 function SubmittedAssignments() {
+  const axiosInstance = useAxiosInstance();
+
+  // const axiosInstance = useAxiosInstance();
   const { user } = useAuthProvider();
   // console.log(user.email);
   const getData = async () => {
