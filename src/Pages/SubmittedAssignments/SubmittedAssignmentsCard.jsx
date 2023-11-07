@@ -23,7 +23,7 @@ function SubmittedAssignmentsCard({ submittedAssignments }) {
         Swal.fire({
           icon: "success",
           title: "Success!",
-          text: "Assignment has been updated successfully.",
+          text: "Assignment has been Marked successfully.",
         });
         // navigate("/assignments");
       }

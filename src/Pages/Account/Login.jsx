@@ -20,7 +20,7 @@ function Login() {
       .then((user) => {
         swal("Success", "Login successful!", "success");
         navigat(preveLocation?.state || "/");
-        console.log(user.user);
+        // console.log(user.user);
       })
       .catch((error) => {
         console.log(error.message);
@@ -33,7 +33,7 @@ function Login() {
       .then((user) => {
         swal("Success", "Login successful!", "success");
         navigat(preveLocation?.state || "/");
-        console.log(user.user, 1);
+        // console.log(user.user, 1);
       })
       .catch((error) => {
         console.log(error.message);

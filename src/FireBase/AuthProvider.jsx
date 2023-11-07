@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import app from "./firebaseConfig ";
+import axiosInstance from "../AxiosAPI/axiosInstance";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -40,6 +41,15 @@ function AuthProvider({ children }) {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+      if (currentUser) {
+        const looggedEmail = { user: currentUser.email };
+        // console.log(currentUser);
+        axiosInstance
+          .post("/api/auth/access-token", looggedEmail)
+          .then((res) => {
+            console.log(res.data);
+          });
+      }
     });
 
     return () => {
