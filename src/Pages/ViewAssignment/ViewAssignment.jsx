@@ -123,9 +123,9 @@ function ViewAssignment() {
             <p className="text-xl font-bold text-green-600">Marks: {marks}</p>
 
             <div className="mt-8">
-              <h3 className="text-2xl font-semibold">Service Details</h3>
+              <h3 className="text-2xl font-semibold">Assignments Details</h3>
               <p className="mt-4 text-gray-700">{description}</p>
-              <p className="mt-4 text-gray-700">{dueDate}</p>
+              <p className="mt-4 text-gray-700">DueDate : {dueDate}</p>
             </div>
             <div className="mt-8 lg:space-x-2 lg:block flex flex-wrap space-y-3">
               <Link

@@ -92,7 +92,28 @@ function UpdateAssignment() {
   }
   let date = UpdatedAssignment?.data.dueDate;
   return (
-    <div className="pt-[200px]">
+    <div className="">
+      <div
+        className="hero min-h-screen"
+        style={{
+          backgroundImage:
+            "url(https://i.ibb.co/3Y6m6fQ/corinne-kutz-JQL8if-Cl-N-E-unsplash-1.jpg)",
+        }}
+      >
+        <div className="hero-overlay bg-opacity-60"></div>
+        <div className="hero-content text-center text-neutral-content  pt-[150px]">
+          <div className="max-w-xl">
+            <h1 className="mb-5 text-5xl font-bold">Explore Assignments</h1>
+            <p className="mb-5 font-semibold lg:text-xl">
+              Explore a wide range of assignments on our platform, suitable for
+              both students seeking learning opportunities and instructors
+              creating assignments. Begin your educational journey with us
+              today.
+            </p>
+            <button className="btn btn-primary">Get Started</button>
+          </div>
+        </div>
+      </div>
       <div className="assignment-nav-wrap">
         <ul className="nav nav-pills" id="pills-tab-1" role="tablist">
           <li className="nav-item">

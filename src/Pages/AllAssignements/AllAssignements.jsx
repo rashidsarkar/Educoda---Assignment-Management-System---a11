@@ -48,6 +48,7 @@ function AllAssignments() {
   const handleDifficultyChange = (newDifficulty) => {
     setSelectedDifficulty(newDifficulty);
     // Call the refetch function to fetch data with the new difficulty
+    setPage(1);
     refetch();
   };
   let totalPage = Math.ceil(allAssignments?.count / limit);
@@ -64,6 +65,10 @@ function AllAssignments() {
       setPage(page + 1);
     }
   };
+  const valueOnChange = (e) => {
+    setLimit(e.target.value);
+    setPage(1);
+  };
   if (error) {
     return error.message;
   }
@@ -73,7 +78,29 @@ function AllAssignments() {
   // console.log(allAssignments);
 
   return (
-    <div className="min-h-screen pt-[200px]">
+    <div className="min-h-screen ">
+      <div
+        className="hero min-h-screen"
+        style={{
+          backgroundImage:
+            "url(https://i.ibb.co/L9vvV73/iewek-gnos-hh-Ux08-Pu-Ypc-unsplash.jpg)",
+        }}
+      >
+        <div className="hero-overlay bg-opacity-60"></div>
+        <div className="hero-content text-center text-neutral-content  pt-[150px]">
+          <div className="max-w-xl">
+            <h1 className="mb-5 text-5xl font-bold">Explore Assignments</h1>
+            <p className="mb-5 font-semibold lg:text-xl">
+              Explore a wide range of assignments on our platform, suitable for
+              both students seeking learning opportunities and instructors
+              creating assignments. Begin your educational journey with us
+              today.
+            </p>
+            <button className="btn btn-primary">Get Started</button>
+          </div>
+        </div>
+      </div>
+
       <div className="assignment-nav-wrap">
         <ul
           className="flex justify-between nav nav-pills"
@@ -150,7 +177,7 @@ function AllAssignments() {
                 <select
                   id="itemsPerPage"
                   className="py-1 border rounded-md lg:px-2 lg:w-auto w-[50px]"
-                  onChange={(event) => setLimit(event.target.value)}
+                  onChange={(event) => valueOnChange(event)}
                   value={limit}
                 >
                   <option value="3">3</option>

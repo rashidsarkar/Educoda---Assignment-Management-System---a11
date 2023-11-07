@@ -37,7 +37,29 @@ function SubmittedAssignments() {
     return <div>Error: {error.message}</div>;
   }
   return (
-    <div className="min-h-screen py-[150px]">
+    <div className="min-h-screen ">
+      <div
+        className="hero min-h-screen"
+        style={{
+          backgroundImage:
+            "url(https://i.ibb.co/thmYcnf/anete-lusina-zws-Hjak-E-i-I-unsplash.jpg)",
+        }}
+      >
+        <div className="hero-overlay bg-opacity-60"></div>
+        <div className="hero-content text-center text-neutral-content  pt-[150px]">
+          <div className="max-w-xl">
+            <h1 className="mb-5 text-5xl font-bold">
+              Assignment Variety Awaits
+            </h1>
+            <p className="mb-5 font-semibold lg:text-xl">
+              Find interesting and challenging assignments that will expand your
+              knowledge and skills. Discover opportunities for growth and
+              learning. Get started on your educational journey today.
+            </p>
+            <button className="btn btn-primary">Get Started</button>
+          </div>
+        </div>
+      </div>
       <div className="assignment-nav-wrap">
         <ul
           className="flex justify-between nav nav-pills"
@@ -49,7 +71,7 @@ function SubmittedAssignments() {
           </li>
         </ul>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-5">
         {submittedAssignments.map((item) => (
           <SubmittedAssignmentsCard
             submittedAssignments={item}

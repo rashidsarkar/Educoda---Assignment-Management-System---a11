@@ -63,7 +63,28 @@ function AssignmentCreate() {
   };
 
   return (
-    <div className="pt-32">
+    <div className="">
+      <div
+        className="hero min-h-screen"
+        style={{
+          backgroundImage:
+            "url(https://i.ibb.co/bK4BWtJ/karthikeya-gs-HGn2-OIV6-Cgo-unsplash.jpg)",
+        }}
+      >
+        <div className="hero-overlay bg-opacity-60"></div>
+        <div className="hero-content text-center text-neutral-content  pt-[150px]">
+          <div className="max-w-xl">
+            <h1 className="mb-5 text-5xl font-bold">Our Mission and Vision</h1>
+            <p className="mb-5 font-semibold lg:text-xl">
+              At AssignmentHub, our mission is to connect students, educators,
+              and professionals through a diverse selection of assignments. We
+              envision a world where learning is accessible and engaging for
+              all. Join us in this educational adventure.
+            </p>
+            <button className="btn btn-primary">Get Started</button>
+          </div>
+        </div>
+      </div>
       <div className="assignment-nav-wrap">
         <ul className="nav nav-pills" id="pills-tab-1" role="tablist">
           <li className="nav-item" role="presentation">

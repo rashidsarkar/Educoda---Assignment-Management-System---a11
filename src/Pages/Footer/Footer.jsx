@@ -33,22 +33,16 @@ function Footer() {
                 Home
               </Link>
               <Link
-                to="/about"
+                to="/assignments"
                 className="text-lg text-white transition duration-300 hover:text-[#6440FA] block mb-2"
               >
-                About
+                Assignments
               </Link>
               <Link
-                to="/courses"
+                to="/myAssignments"
                 className="text-lg text-white transition duration-300 hover:text-[#6440FA] block mb-2"
               >
-                Courses
-              </Link>
-              <Link
-                to="/blog"
-                className="text-lg text-white transition duration-300 hover:text-[#6440FA] block mb-2"
-              >
-                Blog
+                My Assignments
               </Link>
             </div>
           </div>

@@ -49,6 +49,15 @@ const MarkAssignmentModal = ({ viewAssignment, handleGiveMark }) => {
             <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
               <Page pageNumber={pageNumber} />
             </Document>
+            <a
+              href={pdf}
+              className="text-orange-500 cursor-pointer"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Click here to view PDF
+            </a>
+
             <p>
               Page {pageNumber} of {numPages}
             </p>

@@ -10,8 +10,9 @@ import useAxiosInstance from "../../AxiosAPI/useAxiosInstance";
 function SubmittedAssignmentsCard({ submittedAssignments }) {
   const axiosInstance = useAxiosInstance();
 
-  const { title, marks, thumbnail, status, examineeName, _id } =
+  const { title, marks, thumbnail, status, nameExaminne, examineeName, _id } =
     submittedAssignments;
+  console.log(submittedAssignments);
   const queryClient = useQueryClient();
   const modalRef = useRef(null);
 
@@ -70,7 +71,7 @@ function SubmittedAssignmentsCard({ submittedAssignments }) {
             <span className="capitalize">{status}</span>
           </p>
         </div>
-        <p className="text-lg">Examinee: {examineeName}</p>
+        <p className="text-lg">Examinee: {nameExaminne}</p>
         <div className="flex justify-end mt-4">
           <button
             onClick={() =>

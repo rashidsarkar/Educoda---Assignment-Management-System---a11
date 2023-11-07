@@ -22,7 +22,9 @@ function MyAssingmentCard({ assignment }) {
         <td className="text-xl">{marks}</td>
 
         <th>
-          <button className="btn btn-ghost btn-xs text-xl">{status} </button>
+          <button className="btn btn-ghost btn-xs font-bold text-xl">
+            {status}{" "}
+          </button>
         </th>
         <th>
           <td className="text-xl">{obtainmarks}</td>
