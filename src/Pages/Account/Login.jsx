@@ -30,10 +30,9 @@ function Login() {
 
   const handleGoogleSignIn = () => {
     googleSing()
-      .then((user) => {
-        swal("Success", "Login successful!", "success");
+      .then(() => {
+        swal("Success", "Signup successful!", "success");
         navigat(preveLocation?.state || "/");
-        // console.log(user.user, 1);
       })
       .catch((error) => {
         console.log(error.message);
