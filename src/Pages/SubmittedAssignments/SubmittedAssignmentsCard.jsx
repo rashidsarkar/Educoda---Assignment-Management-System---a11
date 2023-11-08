@@ -51,12 +51,12 @@ function SubmittedAssignmentsCard({ submittedAssignments }) {
 
   // console.log(_id);
   return (
-    <div className="bg-gray-200  rounded-lg shadow-lg lg:w-96">
+    <div className="bg-gray-200 rounded-lg shadow-lg lg:w-96">
       <figure>
         <img
           src={thumbnail}
           alt={title}
-          className="object-cover rounded w-full h-40"
+          className="object-cover w-full h-40 rounded"
         />
       </figure>
       <div className="p-4">
@@ -64,11 +64,6 @@ function SubmittedAssignmentsCard({ submittedAssignments }) {
         <div className="text-lg text-gray-600 lg:flex lg:justify-between">
           <p>
             <span className="font-semibold">Marks:</span> {marks}
-          </p>
-          <span className="hidden mx-2 lg:block">| |</span>
-          <p className="lg:text-right">
-            <span className="font-semibold">Status:</span>{" "}
-            <span className="capitalize">{status}</span>
           </p>
         </div>
         <p className="text-lg">Examinee: {nameExaminne}</p>
