@@ -46,9 +46,13 @@ const MarkAssignmentModal = ({ viewAssignment, handleGiveMark }) => {
         <div className="p-6 bg-white border rounded-lg modal-box">
           <h3 className="text-lg font-bold">Mark Assignment</h3>
           <div className="py-4">
-            <Document file={pdf} onLoadSuccess={onDocumentLoadSuccess}>
-              <Page pageNumber={pageNumber} />
-            </Document>
+            <iframe
+              src={pdf}
+              frameBorder="0"
+              width="100%"
+              height="200"
+              title="PDF Viewer"
+            ></iframe>
             <a
               href={pdf}
               className="text-orange-500 cursor-pointer"

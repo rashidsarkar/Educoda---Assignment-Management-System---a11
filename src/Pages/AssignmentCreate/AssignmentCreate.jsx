@@ -65,7 +65,7 @@ function AssignmentCreate() {
   return (
     <div className="">
       <div
-        className="hero min-h-screen"
+        className="min-h-screen hero"
         style={{
           backgroundImage:
             "url(https://i.ibb.co/bK4BWtJ/karthikeya-gs-HGn2-OIV6-Cgo-unsplash.jpg)",
